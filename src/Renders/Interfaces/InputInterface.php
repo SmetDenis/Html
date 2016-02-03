@@ -12,19 +12,25 @@
  * @link      https://github.com/JBZoo/Html
  */
 
-namespace JBZoo\Html;
+namespace JBZoo\Html\Renders\Interfaces;
 
 /**
- * Class Html
+ * Class InputInterface
+ *
  * @package JBZoo\Html
  */
-class Package
+interface InputInterface
 {
+
     /**
-     * @return string
+     * Output content.
+     *
+     * @param $name
+     * @param $value
+     * @param string|array|null $class
+     * @param string|null $id
+     * @param array $params
+     * @return mixed
      */
-    public function doSomeStreetMagic()
-    {
-        return 'street magic';
-    }
+    public function render($name, $value, $class, $id, array $params);
 }

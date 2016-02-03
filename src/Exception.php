@@ -16,9 +16,9 @@ namespace JBZoo\Html;
 
 /**
  * Class Exception
+ *
  * @package JBZoo\Html
  */
 class Exception extends \Exception
 {
-    
 }
