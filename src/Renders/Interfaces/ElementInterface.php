@@ -10,27 +10,28 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace JBZoo\Html\Renders\Interfaces;
 
 /**
- * Interface ListInterface
+ * Interface ElementInterface
  *
  * @package JBZoo\Html\Renders\Interfaces
  */
-interface ListInterface
+interface ElementInterface
 {
 
     /**
-     * Render output content.
+     * Output content.
      *
-     * @param $name
-     * @param $value
-     * @param string|array|null $class
-     * @param string|null $id
+     * @param string $name
+     * @param string $value
+     * @param array|string $class
+     * @param string $id
      * @param array $params
      * @return mixed
      */
-    public function render($name, $value, $class, $id, array $params);
+    public function render($name, $value, $class = '', $id = '', array $params = array());
 }

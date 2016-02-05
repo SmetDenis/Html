@@ -10,13 +10,16 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace JBZoo\Html;
 
 use JBZoo\Path\Path;
+use JBZoo\Utils\FS;
 use JBZoo\Utils\Str;
 use Pimple\Container;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Class Html
@@ -26,19 +29,8 @@ use Pimple\Container;
 class Html extends Container
 {
 
-    const PATH_KEY = 'jb_html';
+    const PATH_KEY   = 'jb_html';
     const RENDER_DIR = 'Renders';
-    const CLASS_POSTFIX = 'Render';
-
-    /**
-     * Hold renders.
-     *
-     * @var array
-     */
-    protected $_renders = array(
-        'input',
-        'select',
-    );
 
     /**
      * Html constructor.
@@ -46,35 +38,35 @@ class Html extends Container
     public function __construct()
     {
         parent::__construct(array());
+        $this->_setupDefault();
+    }
 
+    /**
+     * Setup default renders.
+     *
+     * @throws \JBZoo\Path\Exception
+     * @return void
+     */
+    protected function _setupDefault()
+    {
         $path = Path::getInstance(Html::PATH_KEY);
+        $path->add(__DIR__ . '/' . Html::RENDER_DIR, 'core');
 
-        $path->add(__DIR__ . '/' . Html::RENDER_DIR);
-        $this->_setRenders();
-    }
+        $finder = new Finder();
 
-    /**
-     * Add new html render.
-     *
-     * @param $render
-     * @return $this
-     */
-    public function addRender($render)
-    {
-        $this[$render] = $this->_getRender($render);
-        array_unshift($this->_renders, $render);
+        $files = $finder->files()
+            ->name('*.php')
+            ->in($path->get('core:'));
 
-        return $this;
-    }
+        foreach ($files as $file) {
+            if ($file->getFilename() == 'Render.php') {
+                break;
+            }
 
-    /**
-     * Get all renders.
-     *
-     * @return array
-     */
-    public function getRenders()
-    {
-        return $this->_renders;
+            $name   = FS::stripExt($file->getFilename());
+            $render = Str::low($name);
+            $this[$render] = self::_register($render, __NAMESPACE__);
+        }
     }
 
     /**
@@ -93,40 +85,42 @@ class Html extends Container
     }
 
     /**
-     * @param $render
+     * Get and register render.
+     *
+     * @param string $render
+     * @param string $ns
      * @return mixed
      */
-    public static function _($render)
+    public static function _($render, $ns = __NAMESPACE__)
     {
-        $html = self::getInstance();
+        $html   = self::getInstance();
+        $render = Str::low($render);
+
+        if (!isset($html[$render])) {
+            $html[$render] = self::_register($render, $ns);
+        }
+
         return $html[$render];
     }
 
     /**
-     * Setup renders.
+     * Pimple callback register render.
      *
-     * @return void
-     */
-    protected function _setRenders()
-    {
-        foreach ($this->_renders as $render) {
-            $this[mb_strtolower($render)] = $this->_getRender($render);
-        }
-    }
-
-    /**
      * @param $render
-     * @return string
+     * @param string $ns
+     * @return \Closure
      */
-    protected function _getRender($render)
+    private static function _register($render, $ns)
     {
-        $render = Str::clean($render);
-        $render = implode('\\', array(
-            __NAMESPACE__,
-            Html::RENDER_DIR,
-            Html::CLASS_POSTFIX . ucfirst($render)
-        ));
+        return function () use ($render, $ns) {
+            $render = Str::clean($render);
+            $render = implode('\\', array(
+                $ns,
+                Html::RENDER_DIR,
+                ucfirst($render)
+            ));
 
-        return new $render();
+            return new $render();
+        };
     }
 }

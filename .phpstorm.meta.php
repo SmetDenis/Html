@@ -10,6 +10,7 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace PHPSTORM_META {
@@ -17,8 +18,8 @@ namespace PHPSTORM_META {
     /** @noinspection PhpIllegalArrayKeyTypeInspection */
     $STATIC_METHOD_TYPES = [
         \JBZoo\Html\Html::_('') => [
-            "input"     instanceof \JBZoo\Html\Renders\RenderInput,
-            "input"     instanceof \JBZoo\Html\Renders\RenderSelect,
+            'input'     instanceof \JBZoo\Html\Renders\InputRender,
+            'select'    instanceof \JBZoo\Html\Renders\SelectRender,
         ],
     ];
 }

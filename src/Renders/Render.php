@@ -10,12 +10,12 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace JBZoo\Html\Renders;
 
 use JBZoo\Utils\Str;
-use JBZoo\Html\Exception;
 
 /**
  * Class Render
@@ -26,72 +26,20 @@ class Render
 {
 
     /**
-     * Render template.
+     * Clear attribute value
      *
-     * @var string
-     */
-    protected $_tpl;
-
-    /**
-     * Render pattern.
-     *
-     * @var array
-     */
-    protected $_pattern = array();
-
-    /**
-     * Element constructor.
-     */
-    public function __construct()
-    {
-        $this->_setPattern();
-    }
-
-    /**
-     * Setup render patter.
-     *
-     * @return void
-     */
-    protected function _setPattern()
-    {
-        preg_match_all('#\{\{([\w\d\._]+)\}\}#', $this->_tpl, $matches);
-        $this->_pattern = array(
-            'pattern'    => str_replace($matches[0], '%s', $this->_tpl),
-            'attributes' => $matches[1],
-        );
-    }
-
-    /**
-     * Format output template.
-     *
-     * @param array $data
+     * @param string $value
      * @return string
-     * @throws Exception
      */
-    protected function _format(array $data)
+    protected function _cleanValue($value)
     {
-        if (empty($this->_tpl)) {
-            throw new Exception('Please, setup render template.');
-        }
-
-        $replace    = array();
-        $template   = $this->_pattern['pattern'];
-        $attributes = $this->_pattern['attributes'];
-
-        foreach ($attributes as $attr) {
-            $replacement = isset($data[$attr]) ? $data[$attr] : null;
-
-            if (is_array($replacement)) {
-                $replacement = implode('', $replacement);
-            }
-
-            $replace[] = $replacement;
-        }
-
-        return vsprintf($template, $replace);
+        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        return trim($value);
     }
 
     /**
+     * Get string by "jb" prefix.
+     *
      * @param $string
      * @return string
      */
@@ -101,23 +49,76 @@ class Render
     }
 
     /**
-     * @param array $attrs
+     * Merge attributes by given key.
+     *
+     * @param array $attributes
+     * @param null $val
+     * @param string $key
+     * @return array
+     */
+    protected function _mergeAttr(array $attributes = [], $val = null, $key = 'class')
+    {
+        if (isset($attributes[$key]) && Str::trim($attributes[$key])) {
+            $attributes[$key] .= ' ' . $val;
+        } else {
+            $attributes[$key] = $val;
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * Normalize class attribute.
+     *
+     * @param array $attributes
+     * @param array|string $class
+     * @return array
+     */
+    protected function _normalizeClassAttr(array $attributes, $class = '')
+    {
+        if (is_array($class)) {
+            $class = implode(' ', $class);
+        }
+
+        return $this->_mergeAttr($attributes, $class);
+    }
+
+    /**
+     * Array parse to attributes.
+     *
+     * @param $attributes
      * @return string
      */
-    protected function _formatAttributes(array $attrs = array())
+    protected function _parseAttributes(array $attributes = array())
     {
         $result = ' ';
 
-        if (!empty($attrs)) {
-            ksort($attrs);
-            foreach ($attrs as $key => $param) {
-                $param = (array)$param;
-                $value = implode(' ', $param);
-                $value = Str::clean($value);
+        foreach ($attributes as $key => $param) {
+            $param = (array)$param;
+            $value = implode(' ', $param);
+            $value = $this->_cleanValue($value);
+
+            if (!empty($value) || $value == '0' || $key == 'value') {
                 $result .= ' ' . $key . '="' . $value . '"';
             }
         }
 
         return Str::trim($result);
+    }
+
+    /**
+     * Setup element id.
+     *
+     * @param array $attributes
+     * @param string $id
+     * @return array
+     */
+    protected function _setId(array $attributes, $id = '')
+    {
+        if (!empty($id)) {
+            $attributes['id'] = $id;
+        }
+
+        return $attributes;
     }
 }

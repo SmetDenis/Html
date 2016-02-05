@@ -13,14 +13,17 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html\Renders\Interfaces;
+namespace Custom\Html\Renders;
+
+use JBZoo\Html\Renders\Render;
+use JBZoo\Html\Renders\Interfaces\InputInterface;
 
 /**
- * Interface InputInterface
+ * Class Test
  *
- * @package JBZoo\Html\Renders\Interfaces
+ * @package Custom\Html\Renders
  */
-interface InputInterface
+class Test extends Render implements InputInterface
 {
 
     /**
@@ -34,5 +37,8 @@ interface InputInterface
      * @param array $params
      * @return mixed
      */
-    public function render($type, $name, $value, $class = '', $id = '', array $params = array());
+    public function render($type, $name, $value, $class = '', $id = '', array $params = array())
+    {
+        return 'Im test custom render';
+    }
 }

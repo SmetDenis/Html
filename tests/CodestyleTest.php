@@ -10,6 +10,7 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace JBZoo\PHPUnit;
@@ -20,6 +21,6 @@ namespace JBZoo\PHPUnit;
  */
 class CodestyleTest extends Codestyle
 {
-    protected $_packageName = "Html";
-
+    protected $_packageName   = "Html";
+    protected $_packageAuthor = 'Sergey Kalistratov <kalistratov.s.m@gmail.com>';
 }
