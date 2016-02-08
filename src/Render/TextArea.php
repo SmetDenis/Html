@@ -20,7 +20,7 @@ namespace JBZoo\Html\Render;
  *
  * @package JBZoo\Html\Render
  */
-class TextArea extends Tag
+class Textarea extends Tag
 {
 
     /**
