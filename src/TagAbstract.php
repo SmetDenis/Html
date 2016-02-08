@@ -13,25 +13,33 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html\Renders\Interfaces;
+namespace JBZoo\Html;
+
+use JBZoo\Html\Render\Render;
 
 /**
- * Interface ElementInterface
+ * Class TagAbstract
  *
- * @package JBZoo\Html\Renders\Interfaces
+ * @package JBZoo\Html
  */
-interface ElementInterface
+abstract class TagAbstract extends Render
 {
+
+    /**
+     * Renderer tag.
+     *
+     * @var string
+     */
+    protected $_tag = 'p';
 
     /**
      * Output content.
      *
-     * @param string $name
-     * @param string $value
-     * @param array|string $class
+     * @param string $content
+     * @param string $class
      * @param string $id
-     * @param array $params
+     * @param array $attrs
      * @return mixed
      */
-    public function render($name, $value, $class = '', $id = '', array $params = array());
+    abstract public function render($content, $class = '', $id = '', array $attrs = array());
 }

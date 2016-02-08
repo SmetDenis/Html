@@ -13,17 +13,24 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html\Renders;
+namespace JBZoo\Html\Render;
 
 use JBZoo\Utils\Str;
 
 /**
  * Class Render
  *
- * @package JBZoo\Html\Utils
+ * @package JBZoo\Html\Render
  */
 class Render
 {
+
+    /**
+     * Disallow attributes.
+     *
+     * @var array
+     */
+    protected $_disallowAttr = array();
 
     /**
      * Clear attribute value
@@ -51,49 +58,49 @@ class Render
     /**
      * Merge attributes by given key.
      *
-     * @param array $attributes
+     * @param array $attrs
      * @param null $val
      * @param string $key
      * @return array
      */
-    protected function _mergeAttr(array $attributes = [], $val = null, $key = 'class')
+    protected function _mergeAttr(array $attrs = array(), $val = null, $key = 'class')
     {
-        if (isset($attributes[$key]) && Str::trim($attributes[$key])) {
-            $attributes[$key] .= ' ' . $val;
+        if (isset($attrs[$key]) && Str::trim($attrs[$key])) {
+            $attrs[$key] .= ' ' . $val;
         } else {
-            $attributes[$key] = $val;
+            $attrs[$key] = $val;
         }
 
-        return $attributes;
+        return $attrs;
     }
 
     /**
      * Normalize class attribute.
      *
-     * @param array $attributes
+     * @param array $attrs
      * @param array|string $class
      * @return array
      */
-    protected function _normalizeClassAttr(array $attributes, $class = '')
+    protected function _normalizeClassAttr(array $attrs, $class = '')
     {
         if (is_array($class)) {
             $class = implode(' ', $class);
         }
 
-        return $this->_mergeAttr($attributes, $class);
+        return $this->_mergeAttr($attrs, $class);
     }
 
     /**
-     * Array parse to attributes.
+     * Build attributes.
      *
-     * @param $attributes
+     * @param $attrs
      * @return string
      */
-    protected function _parseAttributes(array $attributes = array())
+    protected function _buildAttrs(array $attrs = array())
     {
         $result = ' ';
 
-        foreach ($attributes as $key => $param) {
+        foreach ($attrs as $key => $param) {
             $param = (array)$param;
             $value = implode(' ', $param);
             $value = $this->_cleanValue($value);
@@ -109,16 +116,34 @@ class Render
     /**
      * Setup element id.
      *
-     * @param array $attributes
+     * @param array $attrs
      * @param string $id
      * @return array
      */
-    protected function _setId(array $attributes, $id = '')
+    protected function _setId(array $attrs, $id = '')
     {
         if (!empty($id)) {
-            $attributes['id'] = $id;
+            $attrs['id'] = $id;
         }
 
-        return $attributes;
+        return $attrs;
+    }
+
+    /**
+     * Remove disallow attributes.
+     *
+     * @param array $attrs
+     * @return array
+     * @SuppressWarnings("unused")
+     */
+    protected function _cleanAttrs(array $attrs = array())
+    {
+        foreach ($attrs as $key => $val) {
+            if (in_array($key, $this->_disallowAttr)) {
+                unset($attrs[$key]);
+            }
+        }
+
+        return $attrs;
     }
 }

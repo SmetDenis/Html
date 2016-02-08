@@ -16,10 +16,8 @@
 namespace JBZoo\Html;
 
 use JBZoo\Path\Path;
-use JBZoo\Utils\FS;
 use JBZoo\Utils\Str;
 use Pimple\Container;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Class Html
@@ -30,7 +28,7 @@ class Html extends Container
 {
 
     const PATH_KEY   = 'jb_html';
-    const RENDER_DIR = 'Renders';
+    const RENDER_DIR = 'Render';
 
     /**
      * Html constructor.
@@ -38,35 +36,9 @@ class Html extends Container
     public function __construct()
     {
         parent::__construct(array());
-        $this->_setupDefault();
-    }
 
-    /**
-     * Setup default renders.
-     *
-     * @throws \JBZoo\Path\Exception
-     * @return void
-     */
-    protected function _setupDefault()
-    {
         $path = Path::getInstance(Html::PATH_KEY);
         $path->add(__DIR__ . '/' . Html::RENDER_DIR, 'core');
-
-        $finder = new Finder();
-
-        $files = $finder->files()
-            ->name('*.php')
-            ->in($path->get('core:'));
-
-        foreach ($files as $file) {
-            if ($file->getFilename() == 'Render.php') {
-                break;
-            }
-
-            $name   = FS::stripExt($file->getFilename());
-            $render = Str::low($name);
-            $this[$render] = self::_register($render, __NAMESPACE__);
-        }
     }
 
     /**

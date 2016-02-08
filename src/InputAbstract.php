@@ -13,32 +13,27 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace Custom\Html\Renders;
+namespace JBZoo\Html;
 
-use JBZoo\Html\Renders\Render;
-use JBZoo\Html\Renders\Interfaces\InputInterface;
+use JBZoo\Html\Render\Render;
 
 /**
- * Class Test
+ * Class InputAbstract
  *
- * @package Custom\Html\Renders
+ * @package JBZoo\Html
  */
-class Test extends Render implements InputInterface
+abstract class InputAbstract extends Render
 {
 
     /**
      * Output content.
      *
      * @param string $name
-     * @param string $type
      * @param string $value
      * @param array|string $class
      * @param string $id
      * @param array $params
      * @return mixed
      */
-    public function render($type, $name, $value, $class = '', $id = '', array $params = array())
-    {
-        return 'Im test custom render';
-    }
+    abstract public function render($name, $value, $class = '', $id = '', array $params = array());
 }

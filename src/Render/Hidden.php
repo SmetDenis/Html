@@ -13,26 +13,20 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html\Renders\Interfaces;
+namespace JBZoo\Html\Render;
 
 /**
- * Interface InputInterface
+ * Class Hidden
  *
- * @package JBZoo\Html\Renders\Interfaces
+ * @package JBZoo\Html\Render
  */
-interface InputInterface
+class Hidden extends Input
 {
 
     /**
-     * Output content.
+     * Setup input type.
      *
-     * @param string $name
-     * @param string $type
-     * @param string $value
-     * @param array|string $class
-     * @param string $id
-     * @param array $params
-     * @return mixed
+     * @var string
      */
-    public function render($type, $name, $value, $class = '', $id = '', array $params = array());
+    protected $_type = 'hidden';
 }

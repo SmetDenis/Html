@@ -31,7 +31,7 @@ class HtmlTest extends PHPUnit
     protected $html;
 
     /**
-     * @var \JBZoo\Html\Renders\Input
+     * @var \JBZoo\Html\Render\Input
      */
     protected $input;
 
@@ -44,7 +44,7 @@ class HtmlTest extends PHPUnit
     {
         parent::setUp();
         $this->html  = Html::getInstance();
-        $this->input = $this->html['input'];
+        $this->input = $this->html->_('Input');
     }
 
     /**
@@ -59,20 +59,6 @@ class HtmlTest extends PHPUnit
     }
 
     /**
-     * Test default renders.
-     *
-     * @return void.
-     */
-    public function testDefaultInstance()
-    {
-        $Html = Html::getInstance();
-
-        isClass('JBZoo\Html\Renders\Input', $Html['input']);
-        isClass('JBZoo\Html\Renders\Input', $Html->_('Input'));
-        isClass('JBZoo\Html\Renders\Input', $Html->_('input'));
-    }
-
-    /**
      * Test add custom render.
      *
      * @return void
@@ -80,72 +66,20 @@ class HtmlTest extends PHPUnit
     public function testCustomAddRender()
     {
         $expected = 'Im test custom render';
-        $result   = $this->html->_('test', 'Custom\Html')->render('text', 'name', 'value', 'class', 'id');
+        $result   = $this->html->_('test', 'Custom\Html')->render('name', 'value', 'class', 'id');
 
         isSame($expected, $result);
     }
 
     /**
-     * Test input text output.
+     * Test default renders.
      *
-     * @return void
+     * @return void.
      */
-    public function testInputText()
+    public function testDefaultInstance()
     {
-        $actual   = $this->input->render('text', 'image', 'my-value');
-        $expected = '<input class="jb-input-text" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-
-        $actual   = $this->input->render('text', 'image', 'my-value', 'simple');
-        $expected = '<input class="jb-input-text simple" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-
-        $actual   = $this->input->render('text', 'image', 'my-value', array('simple', 'array'));
-        $expected = '<input class="jb-input-text simple array" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-
-        $actual   = $this->input->render('text', 'image', 'my-value', 'simple', 'unique');
-        $expected = '<input id="unique" class="jb-input-text simple" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-
-        $actual = $this->input->render('text', 'image', 'my-value', 'simple', 'unique', array(
-            'name'  => 'name',
-            'id'    => 'new-id',
-            'type'  => 'failed',
-            'value' => 'test value',
-        ));
-
-        $expected = '<input id="unique" class="jb-input-text simple" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-
-        $actual = $this->input->render('text', 'image', 'my-value', '', '', array(
-            'data-toggle' => 'tooltip',
-            'data-position' => 'top',
-        ));
-
-        $expected = '<input data-toggle="tooltip" data-position="top" class="jb-input-text" type="text" name="image" value="my-value" />';
-        isSame($expected, $actual);
-    }
-
-    /**
-     * Test hidden input output.
-     *
-     * @return void
-     */
-    public function testInputHidden()
-    {
-        $actual   = $this->input->render('hidden', 'test-name', 'test-value');
-        $expected = '<input class="jb-input-hidden" type="hidden" name="test-name" value="test-value" />';
-        isSame($expected, $actual);
-    }
-
-    /**
-     * @expectedException \JBZoo\Html\Exception
-     */
-    public function testInputException()
-    {
-        $this->input->render('no-exit', 'user', 'value-1');
-        $this->input->render('textarea', 'user', 'value-1');
-        $this->input->render('custom', 'user', 'value-1');
+        $Html = Html::getInstance();
+        isClass('JBZoo\Html\Render\Input', $Html->_('Input'));
+        isClass('JBZoo\Html\Render\Input', $Html->_('input'));
     }
 }
