@@ -26,50 +26,31 @@ class TextAreaTest extends PHPUnit
 {
 
     /**
-     * @var \JBZoo\Html\Html
-     */
-    protected $html;
-
-    /**
-     * @var \JBZoo\Html\Render\TextArea
-     */
-    protected $textarea;
-
-    /**
-     * Setup test data.
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        $this->html  = Html::getInstance();
-        $this->textarea = $this->html->_('textarea');
-    }
-
-    /**
      * Test tag render.
      *
      * @return void
      */
     public function testRender()
     {
-        $expected = $this->textarea->render('simple content');
+        $Html = Html::getInstance();
+        $textarea = $Html->_('textarea');
+
+        $expected = $textarea->render('simple content');
         isSame($expected, '<textarea>simple content</textarea>');
 
-        $expected = $this->textarea->render('simple content', 'my-class');
+        $expected = $textarea->render('simple content', 'my-class');
         isSame($expected, '<textarea class="my-class">simple content</textarea>');
 
-        $expected = $this->textarea->render('simple content', 'my-class', 'my-id');
+        $expected = $textarea->render('simple content', 'my-class', 'my-id');
         isSame($expected, '<textarea id="my-id" class="my-class">simple content</textarea>');
 
-        $expected = $this->textarea->render('simple content', 'my-class', 'my-id', array(
+        $expected = $textarea->render('simple content', 'my-class', 'my-id', array(
             'id' => 'new-id',
             'class' => 'new-class',
         ));
         isSame($expected, '<textarea id="my-id" class="my-class">simple content</textarea>');
 
-        $expected = $this->textarea->render('simple content', 'my-class', 'my-id', array(
+        $expected = $textarea->render('simple content', 'my-class', 'my-id', array(
             'title' => 'text title',
             'style' => 'color: red;',
         ));

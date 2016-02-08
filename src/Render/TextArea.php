@@ -24,7 +24,7 @@ class TextArea extends Tag
 {
 
     /**
-     * Setup texarea tag.
+     * Setup textarea tag.
      *
      * @var string
      */
