@@ -33,6 +33,29 @@ class Render
     protected $_disallowAttr = array();
 
     /**
+     * Build attributes.
+     *
+     * @param $attrs
+     * @return string
+     */
+    public function buildAttrs(array $attrs = array())
+    {
+        $result = ' ';
+
+        foreach ($attrs as $key => $param) {
+            $param = (array)$param;
+            $value = implode(' ', $param);
+            $value = $this->_cleanValue($value);
+
+            if (!empty($value) || $value == '0' || $key == 'value') {
+                $result .= ' ' . $key . '="' . $value . '"';
+            }
+        }
+
+        return Str::trim($result);
+    }
+
+    /**
      * Clear attribute value
      *
      * @param string $value
@@ -91,29 +114,6 @@ class Render
     }
 
     /**
-     * Build attributes.
-     *
-     * @param $attrs
-     * @return string
-     */
-    protected function _buildAttrs(array $attrs = array())
-    {
-        $result = ' ';
-
-        foreach ($attrs as $key => $param) {
-            $param = (array)$param;
-            $value = implode(' ', $param);
-            $value = $this->_cleanValue($value);
-
-            if (!empty($value) || $value == '0' || $key == 'value') {
-                $result .= ' ' . $key . '="' . $value . '"';
-            }
-        }
-
-        return Str::trim($result);
-    }
-
-    /**
      * Setup element id.
      *
      * @param array $attrs
@@ -145,5 +145,14 @@ class Render
         }
 
         return $attrs;
+    }
+
+    /**
+     * @param string $text
+     * @return mixed
+     */
+    protected function _translate($text)
+    {
+        return $text;
     }
 }

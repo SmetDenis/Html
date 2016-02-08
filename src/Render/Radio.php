@@ -13,33 +13,22 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html;
+namespace JBZoo\Html\Render;
 
-use JBZoo\Html\Render\Render;
+use JBZoo\Html\ListAbstract;
 
 /**
- * Class TagAbstract
+ * Class radio
  *
- * @package JBZoo\Html
+ * @package JBZoo\Html\Render
  */
-abstract class TagAbstract extends Render
+class Radio extends ListAbstract
 {
 
     /**
-     * Renderer tag.
+     * Setup radio type.
      *
      * @var string
      */
-    protected $_tag = 'p';
-
-    /**
-     * Output content.
-     *
-     * @param string $content
-     * @param array|string $class
-     * @param string $id
-     * @param array $attrs
-     * @return mixed
-     */
-    abstract public function render($content, $class = '', $id = '', array $attrs = array());
+    protected $_type = 'radio';
 }

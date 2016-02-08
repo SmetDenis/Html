@@ -38,7 +38,7 @@ class Tag extends TagAbstract
      * Create html tag.
      *
      * @param string $content
-     * @param string $class
+     * @param array|string $class
      * @param string $id
      * @param array $attrs
      * @return string
@@ -53,20 +53,8 @@ class Tag extends TagAbstract
         }
 
         $format = (!empty($attrs)) ? '<%s %s>%s</%s>' : '<%s%s>%s</%s>';
-        $output = sprintf($format, $this->_tag, $this->_buildAttrs($attrs), $content, $this->_tag);
+        $output = sprintf($format, $this->_tag, $this->buildAttrs($attrs), $content, $this->_tag);
 
         return $output;
-    }
-
-    /**
-     * Setup create tag.
-     *
-     * @param string $tag
-     * @return $this
-     */
-    public function set($tag = 'p')
-    {
-        $this->_tag = $tag;
-        return $this;
     }
 }

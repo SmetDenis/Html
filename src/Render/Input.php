@@ -69,6 +69,6 @@ class Input extends InputAbstract
             'type'  => $this->_type
         );
 
-        return '<input ' . $this->_buildAttrs($attrs) . ' />';
+        return '<input ' . $this->buildAttrs($attrs) . ' />';
     }
 }

@@ -15,18 +15,13 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Html\ListAbstract;
+
 /**
- * Class TextArea
+ * Class CheckBox
  *
  * @package JBZoo\Html\Render
  */
-class TextArea extends Tag
+class Checkbox extends ListAbstract
 {
-
-    /**
-     * Setup texarea tag.
-     *
-     * @var string
-     */
-    protected $_tag = 'textarea';
 }

@@ -57,12 +57,6 @@ class TextAreaTest extends PHPUnit
         $expected = $this->textarea->render('simple content');
         isSame($expected, '<textarea>simple content</textarea>');
 
-        $expected = $this->textarea->set()->render('simple content');
-        isSame($expected, '<textarea>simple content</textarea>');
-
-        $expected = $this->textarea->set('textarea')->render('simple content');
-        isSame($expected, '<textarea>simple content</textarea>');
-
         $expected = $this->textarea->render('simple content', 'my-class');
         isSame($expected, '<textarea class="my-class">simple content</textarea>');
 
@@ -80,14 +74,5 @@ class TextAreaTest extends PHPUnit
             'style' => 'color: red;',
         ));
         isSame($expected, '<textarea title="text title" style="color: red;" id="my-id" class="my-class">simple content</textarea>');
-    }
-
-    /**
-     * @expectedException \JBZoo\Html\Exception
-     */
-    public function testInvalidRender()
-    {
-        $this->textarea->set('li')->render('simple content');
-        $this->textarea->set('strong')->render('simple content');
     }
 }

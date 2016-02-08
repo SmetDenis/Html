@@ -27,7 +27,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Custom\\Html\\Renders\\": "./tests/custom"
+            "Custom\\Html\\Render\\": "./tests/custom"
         }
     },
     "extra"             : {
