@@ -31,7 +31,7 @@ class HiddenTest extends PHPUnit
     protected $html;
 
     /**
-     * @var \JBZoo\Html\Render\Input
+     * @var \JBZoo\Html\Render\Hidden
      */
     protected $hidden;
 
@@ -55,19 +55,19 @@ class HiddenTest extends PHPUnit
     public function testInputText()
     {
         $actual   = $this->hidden->render('image', 'my-value');
-        $expected = '<input class="jb-input-text" name="image" value="my-value" type="hidden" />';
+        $expected = '<input class="jb-input-hidden" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', 'simple');
-        $expected = '<input class="jb-input-text simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', array('simple', 'array'));
-        $expected = '<input class="jb-input-text simple array" name="image" value="my-value" type="hidden" />';
+        $expected = '<input class="jb-input-hidden simple array" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', 'simple', 'unique');
-        $expected = '<input id="unique" class="jb-input-text simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input id="unique" class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
 
         $actual = $this->hidden->render('image', 'my-value', 'simple', 'unique', array(
@@ -77,7 +77,7 @@ class HiddenTest extends PHPUnit
             'value' => 'test value',
         ));
 
-        $expected = '<input id="unique" class="jb-input-text simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input id="unique" class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
 
         $actual = $this->hidden->render('image', 'my-value', '', '', array(
@@ -85,7 +85,49 @@ class HiddenTest extends PHPUnit
             'data-position' => 'top',
         ));
 
-        $expected = '<input data-toggle="tooltip" data-position="top" class="jb-input-text" name="image" value="my-value" type="hidden" />';
+        $expected = '<input data-toggle="tooltip" data-position="top" class="jb-input-hidden" name="image" value="my-value" type="hidden" />';
         isSame($expected, $actual);
+    }
+
+    /**
+     * Test input hidden group.
+     *
+     * @return void
+     */
+    public function testGroup()
+    {
+        $expected = array(
+            array('input' => array(
+                'class' => 'jb-input-hidden',
+                'name'  => 'test',
+                'value' => 'test test',
+                'type'  => 'hidden',
+            )),
+            array('input' => array(
+                'class' => 'jb-input-hidden',
+                'name'  => 'test2',
+                'value' => 'test test2',
+                'type'  => 'hidden'
+            )),
+            array('input' => array(
+                'class' => 'jb-input-hidden array-hidden',
+                'name'  => 'array',
+                'value' => 'val-test',
+                'type'  => 'hidden',
+                'id'    => 'hide-id',
+            )),
+        );
+
+        $html = $this->hidden->group(array(
+            'test'  => 'test test',
+            'test2' => 'test test2',
+            'array' => array(
+                'value' => 'val-test',
+                'class' => 'array-hidden',
+                'id'    => 'hide-id',
+            ),
+        ));
+
+        isHtml($expected, $html);
     }
 }

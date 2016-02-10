@@ -57,7 +57,7 @@ class Input extends InputAbstract
     {
         $attrs = $this->_setId($attrs, $id);
         $attrs = $this->_cleanAttrs($attrs);
-        $attrs = $this->_mergeAttr($attrs, $this->_jbSrt('input-text'));
+        $attrs = $this->_mergeAttr($attrs, $this->_jbSrt('input-' . $this->_type));
 
         if (!empty($class)) {
             $attrs = $this->_normalizeClassAttr($attrs, $class);

@@ -55,11 +55,12 @@ class RadioTest extends PHPUnit
      */
     public function testRadio()
     {
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $html = $this->radio->render(array(
             'val-1',
             'val-2',
             'val-3',
-        ), 'test');
+        ), 'test', array(), array(), true);
 
         $expected = array(
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-0'),
@@ -104,7 +105,7 @@ class RadioTest extends PHPUnit
             '"Test label 3"' => 'Custom',
             'значение'       => 'Translate cyrillic value',
             'common'         => 'Common label'
-        ), 'test', array('common'));
+        ), 'test', array('common'), array(), true);
 
         $expected = array(
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-lt-p-gt-tag-lt-p-gt'),
@@ -168,7 +169,7 @@ class RadioTest extends PHPUnit
             '"Test label 3"' => 'Custom',
             'значение'       => 'Translate cyrillic value',
             'common'         => 'Common label'
-        ), 'test', 'common');
+        ), 'test', 'common', array(), true);
 
         $expected = array(
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-quot-test-label-3-quot'),
@@ -207,17 +208,49 @@ class RadioTest extends PHPUnit
         isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $html = $this->radio->render(array(
+            'test-7' => 'Test label 7',
+            'test-8' => 'Test label 8',
+        ), 'test', array('common', 'test-8', 'test-2', 'test-4'));
+
+        $expected = array(
+            array('input' => array(
+                'id'    => 'preg:/radio-[0-9]+/',
+                'name'  => 'test',
+                'type'  => 'radio',
+                'value' => 'test-7',
+                'class' => 'jb-val-test-7',
+            )),
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-7')),
+                'Test label 7',
+            '/label',
+            array('input' => array(
+                'id'      => 'preg:/radio-[0-9]+/',
+                'name'    => 'test',
+                'type'    => 'radio',
+                'value'   => 'test-8',
+                'class'   => 'jb-val-test-8 jb-checked',
+                'checked' => 'checked',
+            )),
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-8')),
+                'Test label 8',
+            '/label',
+        );
+
+        isHtml($expected, $html);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test checked options by array.
         $html = $this->radio->render(array(
-            'test-1'   => 'Test label 1',
-            'test-2'   => 'Test label 2',
-            'test-3'   => 'Test label 3',
-            'test-4'   => 'Test label 4',
-            'test-6'   => 'Test label 6',
-            'test-7'   => 'Test label 7',
-            'test-8'   => 'Test label 8',
-            'common'   => 'Common label'
-        ), 'test', array('common', 'test-8', 'test-2', 'test-4'));
+            'test-1' => 'Test label 1',
+            'test-2' => 'Test label 2',
+            'test-3' => 'Test label 3',
+            'test-4' => 'Test label 4',
+            'test-6' => 'Test label 6',
+            'test-7' => 'Test label 7',
+            'test-8' => 'Test label 8',
+            'common' => 'Common label'
+        ), 'test', array('common', 'test-8', 'test-2', 'test-4'), array(), true);
 
         $expected = array(
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-1'),
@@ -309,35 +342,18 @@ class RadioTest extends PHPUnit
         isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //  Test clear setup template.
-        $html = $this->radio->tpl('no-exits')->render(array(
-            'test-1'   => 'Test label 1',
-            'test-2'   => 'Test label 2',
-        ), 'test');
-
-        isEmpty(Str::clean($html));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test setup callable template.
         $options = array(
             'test-1' => 'Test label 1',
         );
 
-        $html = $this->radio->tpl(function () {
-            return 'custom output';
-        })->render($options, 'test');
-
-        isSame(implode(PHP_EOL, array(
-            'custom output',
-        )), $html);
-
-        $html = $this->radio->tpl(function ($list, $inpAttrs, $lblAttrs, $text) {
+        $html = $this->radio->render($options, 'test', 0, array(), function ($list, $inpAttrs, $lblAttrs, $text) {
             $input = '<input ' . $list->buildAttrs($inpAttrs) . ' />';
             $text  = '<span class="label-title">' . $text . '</span>';
             $label = '<label ' . $list->buildAttrs($lblAttrs) . '>' . $text . '</label>';
 
             return implode(PHP_EOL, array($input, $label));
-        })->render($options, 'test', 0);
+        });
 
         $expected = array(
             array('input' => array(
@@ -358,6 +374,10 @@ class RadioTest extends PHPUnit
         isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $html = $this->radio->render($options, 'test', 0, array(), 'no-exits');
+        isEmpty($html);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $inputReload = Html::_('checkbox', 'Custom\Html');
         $html = $inputReload->render($options, 'test');
 
@@ -365,11 +385,11 @@ class RadioTest extends PHPUnit
             'div' => array('class' => 'jb-input jb-checkbox'),
                 'label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-test-1'),
                     array('input' => array(
-                        'id'      => 'preg:/checkbox-[0-9]+/',
-                        'name'    => 'test',
-                        'type'    => 'checkbox',
-                        'value'   => 'test-1',
-                        'class'   => 'jb-val-test-1',
+                        'id'    => 'preg:/checkbox-[0-9]+/',
+                        'name'  => 'test',
+                        'type'  => 'checkbox',
+                        'value' => 'test-1',
+                        'class' => 'jb-val-test-1',
                     )),
                     'Test label 1',
                 '/label',

@@ -27,6 +27,9 @@ use JBZoo\Html\Render\Render;
 abstract class ListAbstract extends Render
 {
 
+    const TPL_WRAP = 'wrap';
+    const TPL_DEFAULT = 'default';
+
     /**
      * Default list type.
      *
@@ -45,14 +48,16 @@ abstract class ListAbstract extends Render
      * Generates an HTML checkbox/radio list.
      *
      * @param array $options
-     * @param string $name
-     * @param string|array $selected
-     * @param array $attrs
+     * @param $name
+     * @param array $selected
+     * @param string|array $attrs
+     * @param bool $tpl
      * @return string
      */
-    public function render(array $options, $name, $selected = array(), array $attrs = array())
+    public function render(array $options, $name, $selected = array(), array $attrs = array(), $tpl = false)
     {
         $output = array();
+        $this->_setTpl($tpl);
 
         foreach ($options as $value => $label) {
             $label = Str::clean($label);
@@ -87,21 +92,6 @@ abstract class ListAbstract extends Render
     }
 
     /**
-     * Setup single template.
-     *
-     * @param null $name
-     * @return $this
-     */
-    public function tpl($name = null)
-    {
-        if ($name !== null) {
-            $this->_tpl = $name;
-        }
-
-        return $this;
-    }
-
-    /**
      * Single element template output.
      *
      * @param array $inpAttrs
@@ -111,14 +101,16 @@ abstract class ListAbstract extends Render
      */
     protected function _elementTpl(array $inpAttrs, array $lblAttrs, $text)
     {
-        $input  = '<input ' . $this->buildAttrs($inpAttrs) . ' />';
+        $input = '<input ' . $this->buildAttrs($inpAttrs) . ' />';
 
         if (is_callable($this->_tpl)) {
             return call_user_func($this->_tpl, $this, $inpAttrs, $lblAttrs, $text);
         }
 
         if ($this->_tpl == 'default') {
-            return '<label ' . $this->buildAttrs($lblAttrs) . '>' . $input . $text . '</label>';
+            return implode(PHP_EOL, array($input, $this->_label($lblAttrs, $text)));
+        } elseif ($this->_tpl == 'wrap') {
+            return $this->_label($lblAttrs, $input . $text);
         }
 
         return null;
@@ -150,5 +142,36 @@ abstract class ListAbstract extends Render
         }
 
         return $attrs;
+    }
+
+    /**
+     * Create label tag.
+     *
+     * @param array $attrs
+     * @param string $content
+     * @return string
+     */
+    protected function _label(array $attrs, $content = '')
+    {
+        return '<label ' . $this->buildAttrs($attrs) . '>' . $content . '</label>';
+    }
+
+    /**
+     * Setup template.
+     *
+     * @param $tpl
+     * @return void
+     */
+    protected function _setTpl($tpl)
+    {
+        $this->_tpl = $tpl;
+
+        if ($tpl === true) {
+            $this->_tpl = self::TPL_WRAP;
+        }
+
+        if ($tpl === false) {
+            $this->_tpl = self::TPL_DEFAULT;
+        }
     }
 }
