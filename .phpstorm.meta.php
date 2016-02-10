@@ -24,6 +24,7 @@ namespace PHPSTORM_META {
             'tag'       instanceof \JBZoo\Html\Render\Tag,
             'text'      instanceof \JBZoo\Html\Render\Text,
             'textarea'  instanceof \JBZoo\Html\Render\TextArea,
+            'iframe'    instanceof \JBZoo\Html\Render\Iframe,
         ],
     ];
 }
