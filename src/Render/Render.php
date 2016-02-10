@@ -61,10 +61,10 @@ class Render
      * @param string $value
      * @return string
      */
-    protected function _cleanValue($value)
+    protected function _cleanValue($value, $trim = false)
     {
         $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-        return trim($value);
+        return ($trim) ? Str::trim($value) : $value;
     }
 
     /**

@@ -61,57 +61,150 @@ class RadioTest extends PHPUnit
             'val-3',
         ), 'test');
 
-        isHtmlContain($html, '.jb-label-0 > .jb-val-0');
-        isHtmlContain($html, '.jb-label-0', 'val-1');
-        isHtmlContain($html, '.jb-label-1 > .jb-val-1');
-        isHtmlContain($html, '.jb-label-1', 'val-2');
-        isHtmlContain($html, '.jb-label-2 > .jb-val-2');
-        isHtmlContain($html, '.jb-label-2', 'val-3');
+        $expected = array(
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-0'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 0,
+                    'class' => 'jb-val-0'
+                )),
+                'val-1',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-1'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 1,
+                    'class' => 'jb-val-1'
+                )),
+                'val-2',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-2'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 2,
+                    'class' => 'jb-val-2'
+                )),
+                'val-3',
+            '/label',
+        );
+
+        isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test data and checked single option by array.
         $html = $this->radio->render(array(
-            'test-1'   => 'Test label 1',
-            'test-2'   => 'Test label 2',
-            'test-3'   => 'Test label 3',
-            'значение' => 'Translate cyrillic value',
-            'common'   => 'Common label'
+            '<p>tag</p>'     => 'Tag',
+            ' '              => 'Empty',
+            '"Test label 3"' => 'Custom',
+            'значение'       => 'Translate cyrillic value',
+            'common'         => 'Common label'
         ), 'test', array('common'));
 
-        isHtmlContain($html, '.jb-label-test-1 > .jb-val-test-1');
-        isHtmlContain($html, '.jb-label-test-1 [name=test]');
-        isHtmlContain($html, '.jb-label-test-1 [type=radio]');
-        isHtmlContain($html, '.jb-label-test-1 [value=test-1]');
-        isHtmlContain($html, '.jb-label-test-1', 'Test label 1');
+        $expected = array(
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-lt-p-gt-tag-lt-p-gt'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => '&amp;lt;p&amp;gt;tag&amp;lt;/p&amp;gt;',
+                    'class' => 'jb-val-lt-p-gt-tag-lt-p-gt'
+                )),
+                'Tag',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => ' ',
+                    'class' => 'jb-val-'
+                )),
+                'Empty',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-quot-test-label-3-quot'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => '&amp;quot;Test label 3&amp;quot;',
+                    'class' => 'jb-val-quot-test-label-3-quot'
+                )),
+                'Custom',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-znachenie'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'значение',
+                    'class' => 'jb-val-znachenie'
+                )),
+                'Translate cyrillic value',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'common',
+                    'class'   => 'jb-val-common jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Common label',
+            '/label',
+        );
 
-        isHtmlContain($html, '.jb-label-test-2 > .jb-val-test-2');
-        isHtmlContain($html, '.jb-label-test-2', 'Test label 2');
-
-        isHtmlContain($html, '.jb-label-test-3 > .jb-val-test-3');
-        isHtmlContain($html, '.jb-label-test-3', 'Test label 3');
-
-        isHtmlContain($html, '.jb-label-znachenie > .jb-val-test-3');
-        isHtmlContain($html, '.jb-label-znachenie', 'Translate cyrillic value');
-
-        isHtmlContain($html, '.jb-label-common > .jb-val-common');
-        isHtmlContain($html, '.jb-label-common', 'Common label');
-        isHtmlContain($html, '.jb-label-common > .jb-checked');
-        isHtmlContain($html, '.jb-label-common [checked=checked]');
-        isHtmlContain($html, '.jb-label-common [value=common]');
+        isHtml($expected,$html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test checked single option by string.
         $html = $this->radio->render(array(
-            'test-3'   => 'Test label 3',
-            'значение' => 'Translate cyrillic value',
-            'common'   => 'Common label'
+            '"Test label 3"' => 'Custom',
+            'значение'       => 'Translate cyrillic value',
+            'common'         => 'Common label'
         ), 'test', 'common');
 
-        isHtmlContain($html, '.jb-label-common > .jb-val-common');
-        isHtmlContain($html, '.jb-label-common', 'Common label');
-        isHtmlContain($html, '.jb-label-common > .jb-checked');
-        isHtmlContain($html, '.jb-label-common [checked=checked]');
-        isHtmlContain($html, '.jb-label-common [value=common]');
+        $expected = array(
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-quot-test-label-3-quot'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => '&amp;quot;Test label 3&amp;quot;',
+                    'class' => 'jb-val-quot-test-label-3-quot'
+                )),
+                'Custom',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-znachenie'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'значение',
+                    'class' => 'jb-val-znachenie'
+                )),
+                'Translate cyrillic value',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'common',
+                    'class'   => 'jb-val-common jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Common label',
+            '/label',
+        );
+
+        isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test checked options by array.
@@ -126,30 +219,94 @@ class RadioTest extends PHPUnit
             'common'   => 'Common label'
         ), 'test', array('common', 'test-8', 'test-2', 'test-4'));
 
-        isHtmlContain($html, '.jb-label-common > .jb-val-common');
-        isHtmlContain($html, '.jb-label-common', 'Common label');
-        isHtmlContain($html, '.jb-label-common > .jb-checked');
-        isHtmlContain($html, '.jb-label-common [checked=checked]');
-        isHtmlContain($html, '.jb-label-common [value=common]');
+        $expected = array(
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-1'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'test-1',
+                    'class' => 'jb-val-test-1'
+                )),
+                'Test label 1',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-2'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'test-2',
+                    'class'   => 'jb-val-test-2 jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Test label 2',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-3'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'test-3',
+                    'class' => 'jb-val-test-3'
+                )),
+                'Test label 3',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-4'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'test-4',
+                    'class'   => 'jb-val-test-4 jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Test label 4',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-6'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'test-6',
+                    'class' => 'jb-val-test-6'
+                )),
+                'Test label 6',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-7'),
+                'input' => array(
+                    'id'    => 'preg:/radio-[0-9]+/',
+                    'name'  => 'test',
+                    'type'  => 'radio',
+                    'value' => 'test-7',
+                    'class' => 'jb-val-test-7'
+                )),
+                'Test label 7',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-8'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'test-8',
+                    'class'   => 'jb-val-test-8 jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Test label 8',
+            '/label',
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
+                'input' => array(
+                    'id'      => 'preg:/radio-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'radio',
+                    'value'   => 'common',
+                    'class'   => 'jb-val-common jb-checked',
+                    'checked' => 'checked',
+                )),
+                'Common label',
+            '/label',
+        );
 
-        isHtmlContain($html, '.jb-label-test-8 > .jb-val-test-8');
-        isHtmlContain($html, '.jb-label-test-8 > .jb-checked');
-        isHtmlContain($html, '.jb-label-test-8 [checked=checked]');
-        isHtmlContain($html, '.jb-label-test-8 [value=test-8]');
-
-        isHtmlContain($html, '.jb-label-test-2 > .jb-val-test-2');
-        isHtmlContain($html, '.jb-label-test-2 > .jb-checked');
-        isHtmlContain($html, '.jb-label-test-2 [checked=checked]');
-        isHtmlContain($html, '.jb-label-test-2 [value=test-2]');
-
-        isHtmlContain($html, '.jb-label-test-4 > .jb-val-test-4');
-        isHtmlContain($html, '.jb-label-test-4 > .jb-checked');
-        isHtmlContain($html, '.jb-label-test-4 [checked=checked]');
-        isHtmlContain($html, '.jb-label-test-4 [value=test-4]');
-
-        isHtmlContain($html, '.jb-label-test-5 > .jb-checked');
-        isHtmlContain($html, '.jb-label-test-5 [checked=checked]');
-        isHtmlContain($html, '.jb-label-test-5 [value=test-4]');
+        isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test clear setup template.
@@ -164,7 +321,6 @@ class RadioTest extends PHPUnit
         //  Test setup callable template.
         $options = array(
             'test-1' => 'Test label 1',
-            'test-2' => 'Test label 2',
         );
 
         $html = $this->radio->tpl(function () {
@@ -173,30 +329,53 @@ class RadioTest extends PHPUnit
 
         isSame(implode(PHP_EOL, array(
             'custom output',
-            'custom output',
         )), $html);
 
         $html = $this->radio->tpl(function ($list, $inpAttrs, $lblAttrs, $text) {
-            $input = '<input ' . $list->buildAttrs($inpAttrs) . '>';
+            $input = '<input ' . $list->buildAttrs($inpAttrs) . ' />';
             $text  = '<span class="label-title">' . $text . '</span>';
             $label = '<label ' . $list->buildAttrs($lblAttrs) . '>' . $text . '</label>';
 
             return implode(PHP_EOL, array($input, $label));
         })->render($options, 'test', 0);
 
-        isHtmlContain($html, '.jb-val-test-1');
-        isHtmlContain($html, '.jb-val-test-2');
-        isHtmlContain($html, '.jb-val-test-1.jb-checked');
-        isHtmlNotContain($html, '.jb-radio-lbl .jb-val-test-1', '');
+        $expected = array(
+            array('input' => array(
+                'id'      => 'preg:/radio-[0-9]+/',
+                'name'    => 'test',
+                'type'    => 'radio',
+                'value'   => 'test-1',
+                'class'   => 'jb-val-test-1 jb-checked',
+                'checked' => 'checked',
+            )),
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-1')),
+                'span' => array('class' => 'label-title'),
+                    'Test label 1',
+                '/span',
+            '/label',
+        );
 
-        isHtmlContain($html, '.jb-label-test-1');
-        isHtmlContain($html, '.jb-label-test-2');
+        isHtml($expected, $html);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $inputReload = Html::_('checkbox', 'Custom\Html');
         $html = $inputReload->render($options, 'test');
 
-        isHtmlContain($html, '.jb-input > .jb-checkbox-lbl');
-        isHtmlContain($html, '.jb-input > .jb-checkbox-lbl > jb-val-test-1');
-        isHtmlContain($html, '.jb-input > .jb-checkbox-lbl', 'Test label 1');
+        $expected = array(
+            'div' => array('class' => 'jb-input jb-checkbox'),
+                'label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-test-1'),
+                    array('input' => array(
+                        'id'      => 'preg:/checkbox-[0-9]+/',
+                        'name'    => 'test',
+                        'type'    => 'checkbox',
+                        'value'   => 'test-1',
+                        'class'   => 'jb-val-test-1',
+                    )),
+                    'Test label 1',
+                '/label',
+            '/div'
+        );
+
+        isHtml($expected, $html);
     }
 }

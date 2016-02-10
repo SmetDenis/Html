@@ -55,7 +55,8 @@ abstract class ListAbstract extends Render
         $output = array();
 
         foreach ($options as $value => $label) {
-            $value = Str::trim($value);
+            $label = Str::clean($label);
+            $value = $this->_cleanValue($value, false);
             $alias = Slug::filter($value, '-');
             $text  = $this->_translate($label);
             $id    = Str::unique($this->_type . '-');
@@ -110,7 +111,7 @@ abstract class ListAbstract extends Render
      */
     protected function _elementTpl(array $inpAttrs, array $lblAttrs, $text)
     {
-        $input  = '<input ' . $this->buildAttrs($inpAttrs) . '>';
+        $input  = '<input ' . $this->buildAttrs($inpAttrs) . ' />';
 
         if (is_callable($this->_tpl)) {
             return call_user_func($this->_tpl, $this, $inpAttrs, $lblAttrs, $text);
