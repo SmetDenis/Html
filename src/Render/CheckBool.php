@@ -13,14 +13,14 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBzoo\Html\Render;
+namespace JBZoo\Html\Render;
 
 use JBZoo\Html\BoolAbstract;
 
 /**
  * Class Checkbool
  *
- * @package JBzoo\Html\Render
+ * @package JBZoo\Html\Render
  */
 class Checkbool extends BoolAbstract
 {
