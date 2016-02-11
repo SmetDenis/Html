@@ -18,10 +18,10 @@ namespace JBzoo\Html\Render;
 use JBZoo\Html\BoolAbstract;
 
 /**
- * Class RadioBool
+ * Class Radiobool
  *
  * @package JBzoo\Html\Render
  */
-class RadioBool extends BoolAbstract
+class Radiobool extends BoolAbstract
 {
 }

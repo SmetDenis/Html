@@ -18,11 +18,11 @@ namespace JBzoo\Html\Render;
 use JBZoo\Html\BoolAbstract;
 
 /**
- * Class CheckBool
+ * Class Checkbool
  *
  * @package JBzoo\Html\Render
  */
-class CheckBool extends BoolAbstract
+class Checkbool extends BoolAbstract
 {
 
     /**
