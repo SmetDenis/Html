@@ -13,20 +13,20 @@
  * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-namespace JBZoo\Html\Render;
+namespace JBzoo\Html\Render;
 
-use JBZoo\Html\ListAbstract;
+use JBZoo\Html\BoolAbstract;
 
 /**
- * Class CheckBox
+ * Class CheckBool
  *
- * @package JBZoo\Html\Render
+ * @package JBzoo\Html\Render
  */
-class Checkbox extends ListAbstract
+class CheckBool extends BoolAbstract
 {
 
     /**
-     * Setup checkbox input type.
+     * Setup input type.
      *
      * @var string
      */

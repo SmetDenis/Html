@@ -32,8 +32,7 @@ class BooleansTest extends PHPUnit
      */
     public function testRadio()
     {
-        $Html  = Html::getInstance();
-        $radio = $Html->_('radiobool');
+        $radio = Html::_('radiobool');
 
         $actual   = $radio->render('show');
         $expected = array(
@@ -88,6 +87,50 @@ class BooleansTest extends PHPUnit
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-1')),
                 'Yes',
             '/label',
+        );
+
+        isHtml($expected, $actual);
+    }
+
+    /**
+     * Test bool checkbox.
+     *
+     * @return void
+     */
+    public function testCheckbox()
+    {
+        $radio = Html::_('checkbool');
+
+        $actual = $radio->render('show');
+        $expected = array(
+            'label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-1'),
+                'input' => array(
+                    'id'    => 'preg:/checkbox-[0-9]+/',
+                    'name'  => 'show',
+                    'type'  => 'checkbox',
+                    'value' => 1,
+                    'class' => 'jb-val-1',
+                ),
+                'Yes',
+            '/label'
+        );
+
+        isHtml($expected, $actual);
+
+        $actual = $radio->render('show', 1, array('data-rel' => 'tooltip'), false);
+        $expected = array(
+            'input' => array(
+                'id'       => 'preg:/checkbox-[0-9]+/',
+                'name'     => 'show',
+                'type'     => 'checkbox',
+                'value'    => 1,
+                'class'    => 'jb-val-1 jb-checked',
+                'data-rel' => 'tooltip',
+                'checked'  => 'checked',
+            ),
+            'label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-1'),
+                'Yes',
+            '/label'
         );
 
         isHtml($expected, $actual);

@@ -67,12 +67,13 @@ class Html extends Container
     {
         $html   = self::getInstance();
         $render = Str::low($render);
+        $alias  = $ns . '\\' . $render;
 
-        if (!isset($html[$render])) {
-            $html[$render] = self::_register($render, $ns);
+        if (!isset($html[$alias])) {
+            $html[$alias] = self::_register($render, $ns);
         }
 
-        return $html[$render];
+        return $html[$alias];
     }
 
     /**
