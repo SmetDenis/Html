@@ -45,7 +45,7 @@ class Radio extends ListAbstract
     public function render(array $options, $name, $selected = array(), array $attrs = array(), $tpl = false)
     {
         if (is_array($selected)) {
-            $selectedVal = $selected[count($selected) - 1];
+            $selectedVal = isset($selected[count($selected) - 1]) ? $selected[count($selected) - 1] : null;
             list($options, $selected) = $this->_checkSelected($options, $selectedVal);
         }
 
