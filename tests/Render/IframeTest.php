@@ -35,18 +35,10 @@ class IframeTest extends PHPUnit
         $Html  = Html::getInstance();
         $frame = $Html->_('iframe');
 
-        $actual = $frame->create('http://yandex.ru');
-        isSame('<iframe src="http://yandex.ru"></iframe>', $actual);
+        $actual = $frame->render('http://yandex.ru');
+        isSame('<iframe frameborder="0" src="http://yandex.ru"></iframe>', $actual);
 
-        $actual = $frame->create('http://yandex.ru', 'my-class', 'my-id');
-        isSame('<iframe src="http://yandex.ru" id="my-id" class="my-class"></iframe>', $actual);
-    }
-
-    /**
-     * @expectedException \JBZoo\Html\Exception
-     */
-    public function testRender()
-    {
-        Html::getInstance()->_('iframe')->render();
+        $actual = $frame->render('http://yandex.ru', 'my-class', 'my-id');
+        isSame('<iframe frameborder="0" src="http://yandex.ru" id="my-id" class="my-class"></iframe>', $actual);
     }
 }

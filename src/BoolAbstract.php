@@ -46,10 +46,15 @@ abstract class BoolAbstract extends Render
     {
         $this->_type = Str::low($this->_type);
         if ($this->_type == 'radio') {
-            $options = array(0 => $this->_translate('No'), 1 => $this->_translate('Yes'));
+            $options = array(
+                0 => $this->_translate('No'),
+                1 => $this->_translate('Yes')
+            );
             return Html::_('radio')->render($options, $name, $checked, $attrs, $isLblWrap);
         } elseif ($this->_type == 'checkbox') {
-            $options = array(1 => $this->_translate('Yes'));
+            $options = array(
+                1 => $this->_translate('Yes')
+            );
             return Html::_('checkbox')->render($options, $name, $checked, $attrs, $isLblWrap);
         }
     }

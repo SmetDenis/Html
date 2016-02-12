@@ -52,8 +52,14 @@ class Tag extends TagAbstract
             $attrs = $this->_normalizeClassAttr($attrs, $class);
         }
 
+        $tag = $this->_tag;
+        if (isset($attrs['tag'])) {
+            $tag = $attrs['tag'];
+            unset($attrs['tag']);
+        }
+
         $format = (!empty($attrs)) ? '<%s %s>%s</%s>' : '<%s%s>%s</%s>';
-        $output = sprintf($format, $this->_tag, $this->buildAttrs($attrs), $content, $this->_tag);
+        $output = sprintf($format, $tag, $this->buildAttrs($attrs), $content, $tag);
 
         return $output;
     }

@@ -15,7 +15,7 @@
 
 namespace JBZoo\Html\Render;
 
-use JBZoo\Html\Exception;
+use JBZoo\Html\Html;
 use JBZoo\Utils\Str;
 
 /**
@@ -23,30 +23,17 @@ use JBZoo\Utils\Str;
  *
  * @package JBZoo\Html\Render
  */
-class Iframe extends Tag
+class Iframe extends Render
 {
 
     /**
-     * Setup render tag.
+     * Disallow attributes.
      *
-     * @var string
+     * @var array
      */
-    protected $_tag = 'iframe';
-
-    /**
-     * Deny access.
-     *
-     * @param string $content
-     * @param array|string $class
-     * @param string $id
-     * @param array $attrs
-     * @throws Exception
-     * @return void
-     */
-    public function render($content = '', $class = '', $id = '', array $attrs = array())
-    {
-        throw new Exception('Method render is not available');
-    }
+    protected $_disallowAttr = array(
+        'class', 'id',
+    );
 
     /**
      * Create iframe.
@@ -57,9 +44,19 @@ class Iframe extends Tag
      * @param array $attrs
      * @return string
      */
-    public function create($src, $class = '', $id = '', array $attrs = array())
+    public function render($src, $class = '', $id = '', array $attrs = array())
     {
-        $attrs['src'] = Str::trim($src);
-        return parent::render(null, $class, $id, $attrs);
+        $attrs += array(
+            'frameborder' => 0,
+            'content'     => null,
+            'tag'         => 'iframe',
+            'src'         => Str::trim($src)
+        );
+
+        $attrs   = $this->_cleanAttrs($attrs);
+        $content = $attrs['content'];
+        unset($attrs['content']);
+
+        return Html::_('tag')->render($content, Str::trim($class), Str::trim($id), $attrs);
     }
 }
