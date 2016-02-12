@@ -28,6 +28,7 @@ namespace PHPSTORM_META {
             'select'    instanceof \JBZoo\Html\Render\Select,
             'iframe'    instanceof \JBZoo\Html\Render\Iframe,
             'textarea'  instanceof \JBZoo\Html\Render\TextArea,
+            'datalist'  instanceof \JBZoo\Html\Render\Datalist,
             'radiobool' instanceof \JBZoo\Html\Render\RadioBool,
             'checkbool' instanceof \JBZoo\Html\Render\CheckBool,
             'checkbox'  instanceof \JBZoo\Html\Render\Checkbox,
