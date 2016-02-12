@@ -18,17 +18,18 @@ namespace PHPSTORM_META {
     /** @noinspection PhpIllegalArrayKeyTypeInspection */
     $STATIC_METHOD_TYPES = [
         \JBZoo\Html\Html::_('') => [
-            'input'     instanceof \JBZoo\Html\Render\Input,
-            'button'    instanceof \JBZoo\Html\Render\Button,
-            'select'    instanceof \JBZoo\Html\Render\Select,
-            'hidden'    instanceof \JBZoo\Html\Render\Hidden,
             'tag'       instanceof \JBZoo\Html\Render\Tag,
             'text'      instanceof \JBZoo\Html\Render\Text,
-            'textarea'  instanceof \JBZoo\Html\Render\TextArea,
+            'image'     instanceof \JBZoo\Html\Render\Image,
+            'input'     instanceof \JBZoo\Html\Render\Input,
+            'radio'     instanceof \JBZoo\Html\Render\Radio,
+            'hidden'    instanceof \JBZoo\Html\Render\Hidden,
+            'button'    instanceof \JBZoo\Html\Render\Button,
+            'select'    instanceof \JBZoo\Html\Render\Select,
             'iframe'    instanceof \JBZoo\Html\Render\Iframe,
+            'textarea'  instanceof \JBZoo\Html\Render\TextArea,
             'radiobool' instanceof \JBZoo\Html\Render\RadioBool,
             'checkbool' instanceof \JBZoo\Html\Render\CheckBool,
-            'radio'     instanceof \JBZoo\Html\Render\Radio,
             'checkbox'  instanceof \JBZoo\Html\Render\Checkbox,
         ],
     ];
