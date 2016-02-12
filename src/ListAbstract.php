@@ -120,7 +120,7 @@ abstract class ListAbstract extends Render
      * Checked options.
      *
      * @param string $value
-     * @param array|string $selected
+     * @param string|array $selected
      * @param array $attrs
      * @return array
      */

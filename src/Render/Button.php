@@ -35,7 +35,7 @@ class Button extends ButtonAbstract
      */
     public function render($name = '', array $attrs = array(), $type = 'submit')
     {
-        $attrs += array('content' => null, 'name' => $name);
+        $attrs += array('text' => null, 'name' => $name);
 
         $content = $attrs['text'];
         unset($attrs['text']);

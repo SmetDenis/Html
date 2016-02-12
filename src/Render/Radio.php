@@ -31,4 +31,45 @@ class Radio extends ListAbstract
      * @var string
      */
     protected $_type = 'radio';
+
+    /**
+     * Generates an HTML radio list.
+     *
+     * @param array $options
+     * @param string $name
+     * @param array $selected
+     * @param array $attrs
+     * @param bool|false $tpl
+     * @return string
+     */
+    public function render(array $options, $name, $selected = array(), array $attrs = array(), $tpl = false)
+    {
+        if (is_array($selected)) {
+            $selectedVal = $selected[count($selected) - 1];
+            list($options, $selected) = $this->_checkSelected($options, $selectedVal);
+        }
+
+        if (is_string($selected)) {
+            list($options, $selected) = $this->_checkSelected($options, $selected);
+        }
+
+        return parent::render($options, $name, $selected, $attrs, $tpl);
+    }
+
+    /**
+     * Check selected option in list.
+     *
+     * @param array $options
+     * @param string $selectedVal
+     * @return array
+     */
+    protected function _checkSelected(array $options, $selectedVal)
+    {
+        if (!array_key_exists($selectedVal, $options)) {
+            $selectedVal = 'no-exits';
+            $options['no-exits'] = $this->_translate('No exits');
+        }
+
+        return array($options, $selectedVal);
+    }
 }
