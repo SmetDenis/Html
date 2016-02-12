@@ -19,6 +19,7 @@ namespace PHPSTORM_META {
     $STATIC_METHOD_TYPES = [
         \JBZoo\Html\Html::_('') => [
             'input'     instanceof \JBZoo\Html\Render\Input,
+            'button'    instanceof \JBZoo\Html\Render\Button,
             'select'    instanceof \JBZoo\Html\Render\Select,
             'hidden'    instanceof \JBZoo\Html\Render\Hidden,
             'tag'       instanceof \JBZoo\Html\Render\Tag,
