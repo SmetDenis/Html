@@ -15,8 +15,6 @@
 
 namespace JBZoo\Html\Render;
 
-use JBZoo\Utils\Str;
-
 /**
  * Class Render
  *
@@ -43,7 +41,7 @@ class Render
         $result = ' ';
 
         foreach ($attrs as $key => $param) {
-            $param = (array)$param;
+            $param = (array) $param;
             $value = implode(' ', $param);
             $value = $this->_cleanValue($value);
 
@@ -52,19 +50,20 @@ class Render
             }
         }
 
-        return Str::trim($result);
+        return trim($result);
     }
 
     /**
      * Clear attribute value
      *
-     * @param string $value
+     * @param $value
+     * @param bool|false $trim
      * @return string
      */
     protected function _cleanValue($value, $trim = false)
     {
         $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-        return ($trim) ? Str::trim($value) : $value;
+        return ($trim) ? trim($value) : $value;
     }
 
     /**
@@ -75,7 +74,7 @@ class Render
      */
     protected function _jbSrt($string)
     {
-        return 'jb-' . Str::clean($string);
+        return 'jb-' . $string;
     }
 
     /**
@@ -88,7 +87,7 @@ class Render
      */
     protected function _mergeAttr(array $attrs = array(), $val = null, $key = 'class')
     {
-        if (isset($attrs[$key]) && Str::trim($attrs[$key])) {
+        if (isset($attrs[$key])) {
             $attrs[$key] .= ' ' . $val;
         } else {
             $attrs[$key] = $val;

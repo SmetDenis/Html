@@ -60,8 +60,8 @@ abstract class ListAbstract extends Render
         $this->_setTpl($tpl);
 
         foreach ($options as $value => $label) {
-            $label = Str::clean($label);
-            $value = $this->_cleanValue($value, false);
+            $label = trim($label);
+            $value = $this->_cleanValue($value);
             $alias = Slug::filter($value, '-');
             $text  = $this->_translate($label);
             $id    = Str::unique($this->_type . '-');
@@ -103,14 +103,14 @@ abstract class ListAbstract extends Render
     {
         $input = '<input ' . $this->buildAttrs($inpAttrs) . ' />';
 
-        if (is_callable($this->_tpl)) {
-            return call_user_func($this->_tpl, $this, $inpAttrs, $lblAttrs, $text);
-        }
-
         if ($this->_tpl == 'default') {
             return implode(PHP_EOL, array($input, $this->_label($lblAttrs, $text)));
         } elseif ($this->_tpl == 'wrap') {
             return $this->_label($lblAttrs, $input . $text);
+        }
+
+        if (is_callable($this->_tpl)) {
+            return call_user_func($this->_tpl, $this, $inpAttrs, $lblAttrs, $text);
         }
 
         return null;
@@ -126,6 +126,7 @@ abstract class ListAbstract extends Render
      */
     protected function _checkedOptions($value, $selected, array $attrs)
     {
+
         if (is_array($selected)) {
             foreach ($selected as $val) {
                 if ($value == $val) {

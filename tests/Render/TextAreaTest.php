@@ -50,6 +50,12 @@ class TextAreaTest extends PHPUnit
         ));
         isSame($expected, '<textarea id="my-id" name="test" class="my-class">simple content</textarea>');
 
+        $expected = $textarea->render('test', 'simple content', array('my-class', 'array'), 'my-id', array(
+            'id' => 'new-id',
+        ));
+
+        isSame($expected, '<textarea id="my-id" name="test" class="my-class array">simple content</textarea>');
+
         $expected = $textarea->render('test', 'simple content', 'my-class', 'my-id', array(
             'title' => 'text title',
             'style' => 'color: red;',

@@ -37,14 +37,19 @@ class Image extends Render
      */
     public function render($src, $class = '', $id = '', array $attrs = array())
     {
+        $attrs['class'] = null;
+
         $attrs += array(
             'fullUrl' => true
         );
 
-        $attrs['id']    = $id;
-        $attrs['class'] = (is_array($class)) ? implode(' ', $class) : $class;
+        $attrs['id'] = $id;
 
-        $attrs  = $this->_mergeAttr($attrs, $this->_jbSrt('image'));
+        $attrs = $this->_normalizeClassAttr($attrs, $this->_jbSrt('image'));
+        if (!empty($class)) {
+            $attrs = $this->_normalizeClassAttr($attrs, $class);
+        }
+
         $isFull = $attrs['fullUrl'];
         unset($attrs['fullUrl']);
 

@@ -45,18 +45,18 @@ class ImageTest extends PHPUnit
             'class' => array('new-class'),
             'id'    => 'new-id'
         ));
-        isSame('<img class="simple jb-image" id="custom" src="http://host.local/image.png" />', $actual);
+        isSame('<img class="jb-image simple" id="custom" src="http://host.local/image.png" />', $actual);
 
         $actual = $image->render('image.png', array('new-class', 'my-image'), 'custom', array(
             'class' => array('new-class'),
             'id'    => 'new-id'
         ));
-        isSame('<img class="new-class my-image jb-image" id="custom" src="http://host.local/image.png" />', $actual);
+        isSame('<img class="jb-image new-class my-image" id="custom" src="http://host.local/image.png" />', $actual);
 
         $actual = $image->render('image.png', 'my-image', 'custom', array(
             'alt' => 'jb image render',
             'fullUrl' => false,
         ));
-        isSame('<img alt="jb image render" id="custom" class="my-image jb-image" src="image.png" />', $actual);
+        isSame('<img alt="jb image render" class="jb-image my-image" id="custom" src="image.png" />', $actual);
     }
 }

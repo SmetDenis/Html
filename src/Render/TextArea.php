@@ -35,7 +35,7 @@ class Textarea extends Render
     /**
      * @param $name
      * @param string $content
-     * @param string $class
+     * @param array|string $class
      * @param string $id
      * @param array $attrs
      * @return string
