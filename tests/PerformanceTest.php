@@ -60,30 +60,31 @@ class PerformanceTest extends PHPUnit
 
     public function testRenders()
     {
+        $options = $this->_options;
         runBench(array(
-            'Select' => function () {
-                return Html::_('select')->render($this->_options, 'default', array(
+            'Select' => function () use ($options) {
+                return Html::_('select')->render($options, 'default', array(
                     'val-29'
                 ));
             },
-            'Bool' => function () {
+            'Bool' => function () use ($options) {
                 return Html::_('checkbool')->render('bool');
             },
-            'Checkbox' => function () {
-                return Html::_('checkbox')->render($this->_options, 'checkbox', 'val-20');
+            'Checkbox' => function () use ($options) {
+                return Html::_('checkbox')->render($options, 'checkbox', 'val-20');
             },
-            'Radio' => function () {
-                return Html::_('radio')->render($this->_options, 'radio', 'val-11');
+            'Radio' => function () use ($options) {
+                return Html::_('radio')->render($options, 'radio', 'val-11');
             },
-            'InputText' => function () {
-                return Html::_('input')->render($this->_options, 'input', 'val-11');
+            'InputText' => function () use ($options) {
+                return Html::_('input')->render($options, 'input', 'val-11');
             },
             'Textarea' => function () {
                 return Html::_('textarea')->render('textarea', 'Text area content');
             },
-            'DataList' => function () {
-                return Html::_('datalist')->render($this->_options);
+            'DataList' => function () use ($options) {
+                return Html::_('datalist')->render($options);
             },
-        ), array('count' => 300, 'name' => 'Renders performance'));
+        ), array('count' => 500, 'name' => 'Renders performance'));
     }
 }
