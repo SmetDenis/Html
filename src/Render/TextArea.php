@@ -15,12 +15,14 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Html\Html;
+
 /**
  * Class TextArea
  *
  * @package JBZoo\Html\Render
  */
-class Textarea extends Tag
+class Textarea extends Render
 {
 
     /**
@@ -29,4 +31,20 @@ class Textarea extends Tag
      * @var string
      */
     protected $_tag = 'textarea';
+
+    /**
+     * @param $name
+     * @param string $content
+     * @param string $class
+     * @param string $id
+     * @param array $attrs
+     * @return string
+     */
+    public function render($name, $content = '', $class = '', $id = '', array $attrs = array())
+    {
+        $attrs['name'] = $name;
+        $attrs['tag']  = 'textarea';
+
+        return Html::_('tag')->render($content, $class, $id, $attrs);
+    }
 }
