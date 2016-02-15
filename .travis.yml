@@ -7,22 +7,26 @@ php:
   - 5.6
   - 7.0
 
+env:
+  global:
+    - DEBUG = 1
+
 matrix:
   fast_finish: true
 
   include:
     - php: 5.6
-      env: NODEBUG=1
+      env: DEBUG=0
 
     - php: 7.0
-      env: NODEBUG=1
+      env: DEBUG=0
 
 before_script:
-  - if [[ "$NODEBUG" == "1" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ "$DEBUG" == "0" ]]; then phpenv config-rm xdebug.ini; fi
 
 script:
   - composer update-all
   - composer test
 
 after_script:
-  - composer coveralls
+  - if [[ "$DEBUG" == "1" ]]; then travis_retry composer coveralls; fi
