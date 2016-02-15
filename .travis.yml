@@ -8,8 +8,8 @@ php:
   - 7.0
 
 env:
-  global:
-    - DEBUG = 1
+  matrix:
+    - DEBUG=1
 
 matrix:
   fast_finish: true
