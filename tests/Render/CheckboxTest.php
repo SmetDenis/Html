@@ -16,7 +16,6 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\Html\Html;
-use JBZoo\Utils\Str;
 
 /**
  * Class CheckboxTest
@@ -64,11 +63,11 @@ class CheckboxTest extends PHPUnit
         $expected = array(
             array('label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-0'),
                 'input' => array(
-                    'id'    => 'preg:/checkbox-[0-9]+/',
-                    'name'  => 'test',
-                    'type'  => 'checkbox',
-                    'value' => 0,
-                    'class' => 'jb-val-0 jb-checked',
+                    'id'      => 'preg:/checkbox-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'checkbox',
+                    'value'   => 0,
+                    'class'   => 'jb-val-0',
                     'checked' => 'checked',
                 )),
                 'val-1',
@@ -85,11 +84,11 @@ class CheckboxTest extends PHPUnit
             '/label',
             array('label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-2'),
                 'input' => array(
-                    'id'    => 'preg:/checkbox-[0-9]+/',
-                    'name'  => 'test',
-                    'type'  => 'checkbox',
-                    'value' => 2,
-                    'class' => 'jb-val-2 jb-checked',
+                    'id'      => 'preg:/checkbox-[0-9]+/',
+                    'name'    => 'test',
+                    'type'    => 'checkbox',
+                    'value'   => 2,
+                    'class'   => 'jb-val-2',
                     'checked' => 'checked',
                 )),
                 'val-3',

@@ -113,7 +113,7 @@ class RadioTest extends PHPUnit
                     'id'    => 'preg:/radio-[0-9]+/',
                     'name'  => 'test',
                     'type'  => 'radio',
-                    'value' => '&amp;lt;p&amp;gt;tag&amp;lt;/p&amp;gt;',
+                    'value' => '&lt;p&gt;tag&lt;/p&gt;',
                     'class' => 'jb-val-lt-p-gt-tag-lt-p-gt'
                 )),
                 'Tag',
@@ -133,7 +133,7 @@ class RadioTest extends PHPUnit
                     'id'    => 'preg:/radio-[0-9]+/',
                     'name'  => 'test',
                     'type'  => 'radio',
-                    'value' => '&amp;quot;Test label 3&amp;quot;',
+                    'value' => '&quot;Test label 3&quot;',
                     'class' => 'jb-val-quot-test-label-3-quot'
                 )),
                 'Custom',
@@ -154,14 +154,14 @@ class RadioTest extends PHPUnit
                     'name'    => 'test',
                     'type'    => 'radio',
                     'value'   => 'common',
-                    'class'   => 'jb-val-common jb-checked',
+                    'class'   => 'jb-val-common',
                     'checked' => 'checked',
                 )),
                 'Common label',
             '/label',
         );
 
-        isHtml($expected,$html);
+        isHtml($expected, $html);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Test checked single option by string.
@@ -177,7 +177,7 @@ class RadioTest extends PHPUnit
                     'id'    => 'preg:/radio-[0-9]+/',
                     'name'  => 'test',
                     'type'  => 'radio',
-                    'value' => '&amp;quot;Test label 3&amp;quot;',
+                    'value' => '&quot;Test label 3&quot;',
                     'class' => 'jb-val-quot-test-label-3-quot'
                 )),
                 'Custom',
@@ -198,7 +198,7 @@ class RadioTest extends PHPUnit
                     'name'    => 'test',
                     'type'    => 'radio',
                     'value'   => 'common',
-                    'class'   => 'jb-val-common jb-checked',
+                    'class'   => 'jb-val-common',
                     'checked' => 'checked',
                 )),
                 'Common label',
@@ -239,7 +239,7 @@ class RadioTest extends PHPUnit
                 'name'    => 'test',
                 'type'    => 'radio',
                 'value'   => 'no-exits',
-                'class'   => 'jb-val-no-exits jb-checked',
+                'class'   => 'jb-val-no-exits',
                 'checked' => 'checked',
             )),
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
@@ -281,7 +281,7 @@ class RadioTest extends PHPUnit
                 'name'    => 'test',
                 'type'    => 'radio',
                 'value'   => 'no-exits',
-                'class'   => 'jb-val-no-exits jb-checked',
+                'class'   => 'jb-val-no-exits',
                 'checked' => 'checked',
             )),
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
@@ -341,7 +341,7 @@ class RadioTest extends PHPUnit
                     'name'    => 'test',
                     'type'    => 'radio',
                     'value'   => 'test-4',
-                    'class'   => 'jb-val-test-4 jb-checked',
+                    'class'   => 'jb-val-test-4',
                     'checked' => 'checked',
                 )),
                 'Test label 4',
@@ -396,13 +396,18 @@ class RadioTest extends PHPUnit
             'test-1' => 'Test label 1',
         );
 
-        $html = $this->radio->render($options, 'test', 0, array(), function ($list, $inpAttrs, $lblAttrs, $text) {
-            $input = '<input ' . $list->buildAttrs($inpAttrs) . ' />';
-            $text  = '<span class="label-title">' . $text . '</span>';
-            $label = '<label ' . $list->buildAttrs($lblAttrs) . '>' . $text . '</label>';
+        $html = $this->radio->render($options, 'test', 0, array(),
+            function ($list, $name, $value, $id, $text, $attrs)
+            {
+                $alias    = Str::slug($value, true);
+                $inpClass = 'jb-val-' . $alias;
+                $input    = $list->input($name, $value, $id, $inpClass, $attrs);
+                $text     = '<span class="label-title">' . $text . '</span>';
+                $label    = $list->label($id, $alias, $text);
 
-            return implode(PHP_EOL, array($input, $label));
-        });
+                return implode(PHP_EOL, array($input, $label));
+            }
+        );
 
         $expected = array(
             array('input' => array(
@@ -410,7 +415,7 @@ class RadioTest extends PHPUnit
                 'name'    => 'test',
                 'type'    => 'radio',
                 'value'   => 'test-1',
-                'class'   => 'jb-val-test-1 jb-checked',
+                'class'   => 'jb-val-test-1',
                 'checked' => 'checked',
             )),
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-1')),
@@ -440,7 +445,9 @@ class RadioTest extends PHPUnit
                         'value' => 'test-1',
                         'class' => 'jb-val-test-1',
                     )),
-                    'Test label 1',
+                    'span' => array('class' => 'label-title'),
+                        'Test label 1',
+                    '/span',
                 '/label',
             '/div'
         );

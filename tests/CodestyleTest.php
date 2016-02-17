@@ -17,6 +17,7 @@ namespace JBZoo\PHPUnit;
 
 /**
  * Class CodestyleTest
+ *
  * @package JBZoo\PHPUnit
  */
 class CodestyleTest extends Codestyle

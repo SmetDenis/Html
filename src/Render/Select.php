@@ -92,7 +92,7 @@ class Select extends ListAbstract
     protected function _createGroup($key, array $gOptions, array $selected, array $options)
     {
         $count  = 0;
-        $label  = (is_int($key)) ? 'Select group ' . $key : $key;
+        $label  = (is_int($key)) ? sprintf($this->_translate('Select group %s'), $key) : $key;
         $output = array(
             '<optgroup label="' . $this->_translate($label) . '">'
         );
@@ -102,20 +102,15 @@ class Select extends ListAbstract
             }
 
             $count++;
-            $attrs = array(
-                'class' => implode(' ', array(
-                    $this->_jbSrt('option'),
-                    $this->_jbSrt('option-' . Str::slug($key) . '-' . $count),
-                )),
-                'value' => $value,
-                'selected' => false,
-            );
 
-            if (in_array($value, $selected)) {
-                $attrs['selected'] = true;
-            }
+            $classes = implode(' ', array(
+                $this->_jbSrt('option'),
+                $this->_jbSrt('option-' . Str::slug($key) . '-' . $count),
+            ));
 
-            $output[] = $this->_option($attrs, $label);
+            $isSelected = $this->_isSelected($value, $selected);
+
+            $output[] = $this->_option($value, $isSelected, $classes, $label);
         }
 
         $output[] = '</optgroup>';
@@ -142,26 +137,18 @@ class Select extends ListAbstract
             $count++;
             $label = $data;
             $value = $key;
-            $attrs = array(
-                'value' => $value,
-                'selected' => false,
-            );
 
             $classes = implode(' ', array(
                 $this->_jbSrt('option'),
                 $this->_jbSrt('option-' . $count),
             ));
 
-            if (in_array($value, $_selected)) {
-                $attrs['selected'] = true;
-            }
-
-            $attrs = $this->_mergeAttr($attrs, $classes);
+            $isSelected = $this->_isSelected($value, $_selected);
 
             if (is_array($data)) {
                 $output[] = $this->_createGroup($key, $data, $_selected, $options);
             } else {
-                $output[] = $this->_option($attrs, $label);
+                $output[] = $this->_option($value, $isSelected, $classes, $label);
             }
         }
 
@@ -171,12 +158,39 @@ class Select extends ListAbstract
     /**
      * Create option.
      *
-     * @param array $attrs
+     * @param string $value
+     * @param bool|false $selected
+     * @param string $class
      * @param string $label
      * @return string
      */
-    protected function _option(array $attrs, $label)
+    protected function _option($value, $selected = false, $class = '', $label = '')
     {
-        return '<option ' . $this->buildAttrs($attrs) . '>' . $this->_translate($label) . '</option>';
+        if ($selected === true) {
+            $selected = ' selected="selected"';
+        }
+
+        $option = '<option value="' . $value . '" class="' . $class .  '"' . $selected .'>' .
+                $this->_translate($label) .
+            '</option>';
+
+        return $option;
+    }
+
+    /**
+     * Check selected option.
+     *
+     * @param string $value
+     * @param array $selected
+     * @return bool
+     */
+    protected function _isSelected($value, array $selected = array())
+    {
+        $return = false;
+        if (in_array($value, $selected)) {
+            $return = true;
+        }
+
+        return $return;
     }
 }

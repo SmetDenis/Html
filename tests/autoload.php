@@ -10,8 +10,8 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
-
 
 if (!defined('ROOT_PATH')) { // for PHPUnit process isolation
     define('ROOT_PATH', realpath('.'));
@@ -24,7 +24,6 @@ if ($autoload = realpath('./vendor/autoload.php')) {
     echo 'Please execute "composer update" !' . PHP_EOL;
     exit(1);
 }
-
 
 // Just example
 if ($fixturesPath = realpath(PROJECT_TESTS . '/fixtures.php')) {

@@ -59,58 +59,59 @@ abstract class ListAbstract extends Render
         $output = array();
         $this->_setTpl($tpl);
 
+        $id = Str::unique($this->_type . '-');
         foreach ($options as $value => $label) {
             $label = trim($label);
             $value = $this->_cleanValue($value);
-            $alias = Slug::filter($value, '-');
             $text  = $this->_translate($label);
-            $id    = Str::unique($this->_type . '-');
+            $attrs = $this->_checkedOptions($value, $selected, $attrs);
 
-            $inpAttrs = array(
-                'id'    => $id,
-                'name'  => $name,
-                'type'  => $this->_type,
-                'value' => $value,
-                'class' => $this->_jbSrt('val-' . $alias),
-            );
-
-            $inpAttrs = array_merge($inpAttrs, $attrs);
-            $inpAttrs = $this->_checkedOptions($value, $selected, $inpAttrs);
-
-            $lblAttrs = array(
-                'for' => $id,
-                'class' => array(
-                    $this->_jbSrt($this->_type . '-lbl'),
-                    $this->_jbSrt('label-' . $alias),
-                ),
-            );
-
-            $output[] = $this->_elementTpl($inpAttrs, $lblAttrs, $text);
+            $output[] = $this->_elementTpl($name, $value, $id, $text, $attrs);
         }
 
         return implode(PHP_EOL, $output);
     }
 
     /**
+     * Create input.
+     *
+     * @param string $name
+     * @param string $value
+     * @param string $id
+     * @param string $class
+     * @param array $attrs
+     * @return string
+     */
+    public function input($name, $value = '', $id = '', $class = '', array $attrs = array())
+    {
+        return '<input id="' . $id . '" class="' . $class . '" type="' . $this->_type . '" name="' . $name . '"
+                          value="' . $value . '" ' . $this->buildAttrs($attrs) . '/>';
+    }
+
+    /**
      * Single element template output.
      *
-     * @param array $inpAttrs
-     * @param array $lblAttrs
+     * @param string $name
+     * @param string $value
+     * @param string $id
      * @param string $text
-     * @return null|string
+     * @param array $attrs
+     * @return mixed|null|string
      */
-    protected function _elementTpl(array $inpAttrs, array $lblAttrs, $text)
+    protected function _elementTpl($name, $value = '', $id = '', $text = '', array $attrs = array())
     {
-        $input = '<input ' . $this->buildAttrs($inpAttrs) . ' />';
+        $alias    = Str::slug($value, true);
+        $inpClass = $this->_jbSrt('val-' . $alias);
+        $input    = $this->input($name, $value, $id, $inpClass, $attrs);
 
         if ($this->_tpl == 'default') {
-            return implode(PHP_EOL, array($input, $this->_label($lblAttrs, $text)));
+            return $input . $this->label($id, $alias, $text);
         } elseif ($this->_tpl == 'wrap') {
-            return $this->_label($lblAttrs, $input . $text);
+            return $this->label($id, $alias, $input . $text);
         }
 
         if (is_callable($this->_tpl)) {
-            return call_user_func($this->_tpl, $this, $inpAttrs, $lblAttrs, $text);
+            return call_user_func($this->_tpl, $this, $name, $value, $id, $text, $attrs);
         }
 
         return null;
@@ -126,19 +127,17 @@ abstract class ListAbstract extends Render
      */
     protected function _checkedOptions($value, $selected, array $attrs)
     {
-
+        $attrs['checked'] = false;
         if (is_array($selected)) {
             foreach ($selected as $val) {
                 if ($value == $val) {
                     $attrs['checked'] = 'checked';
-                    $attrs = $this->_mergeAttr($attrs, $this->_jbSrt('checked'));
                     break;
                 }
             }
         } else {
             if ($value == $selected) {
                 $attrs['checked'] = 'checked';
-                $attrs = $this->_mergeAttr($attrs, $this->_jbSrt('checked'));
             }
         }
 
@@ -148,13 +147,19 @@ abstract class ListAbstract extends Render
     /**
      * Create label tag.
      *
-     * @param array $attrs
+     * @param string $id
+     * @param string $valAlias
      * @param string $content
      * @return string
      */
-    protected function _label(array $attrs, $content = '')
+    public function label($id, $valAlias, $content = '')
     {
-        return '<label ' . $this->buildAttrs($attrs) . '>' . $content . '</label>';
+        $class = implode(' ', array(
+            $this->_jbSrt($this->_type . '-lbl'),
+            $this->_jbSrt('label-' . $valAlias),
+        ));
+
+        return '<label for="' . $id . '" class="' . $class . '">' . $content . '</label>';
     }
 
     /**

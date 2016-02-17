@@ -2,7 +2,7 @@
 /**
  * JBZoo Html
  *
- * This file is part of tPerformanceTesthe JBZoo CCK package.
+ * This file is part of the JBZoo CCK package.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
@@ -10,6 +10,7 @@
  * @license   MIT
  * @copyright Copyright (C) JBZoo.com,  All rights reserved.
  * @link      https://github.com/JBZoo/Html
+ * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
 namespace JBZoo\PHPUnit;
@@ -18,23 +19,35 @@ use JBZoo\Html\Html;
 
 /**
  * Class PerformanceTest
+ *
  * @package JBZoo\Html
  */
 class PerformanceTest extends PHPUnit
 {
+
+    /**
+     * Reiteration number.
+     *
+     * @var int
+     */
     protected $_max = 500;
 
+    /**
+     * Input options.
+     *
+     * @var array
+     */
     protected $_options = array(
-        "val-0" => "lbl-0",
-        "val-1" => "lbl-1",
-        "val-2" => "lbl-2",
-        "val-3" => "lbl-3",
-        "val-4" => "lbl-4",
-        "val-5" => "lbl-5",
-        "val-6" => "lbl-6",
-        "val-7" => "lbl-7",
-        "val-8" => "lbl-8",
-        "val-9" => "lbl-9",
+        "val-0"  => "lbl-0",
+        "val-1"  => "lbl-1",
+        "val-2"  => "lbl-2",
+        "val-3"  => "lbl-3",
+        "val-4"  => "lbl-4",
+        "val-5"  => "lbl-5",
+        "val-6"  => "lbl-6",
+        "val-7"  => "lbl-7",
+        "val-8"  => "lbl-8",
+        "val-9"  => "lbl-9",
         "val-10" => "lbl-10",
         "val-11" => "lbl-11",
         "val-12" => "lbl-12",
@@ -58,6 +71,11 @@ class PerformanceTest extends PHPUnit
         "val-30" => "lbl-30",
     );
 
+    /**
+     * Performance render elements.
+     *
+     * @return void
+     */
     public function testRenders()
     {
         $options = $this->_options;

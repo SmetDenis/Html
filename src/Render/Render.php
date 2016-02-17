@@ -39,7 +39,6 @@ class Render
     public function buildAttrs(array $attrs = array())
     {
         $result = ' ';
-
         foreach ($attrs as $key => $param) {
             $param = (array) $param;
             $value = implode(' ', $param);

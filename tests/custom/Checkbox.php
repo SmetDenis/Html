@@ -15,7 +15,7 @@
 
 namespace Custom\Html\Render;
 
-use JBZoo\Html\Html;
+use JBZoo\Utils\Str;
 use JBZoo\Html\ListAbstract;
 
 /**
@@ -35,15 +35,20 @@ class Checkbox extends ListAbstract
     /**
      * Reload default template.
      *
-     * @param array $inpAttrs
-     * @param array $lblAttrs
+     * @param string $name
+     * @param string $value
+     * @param string $id
      * @param string $text
+     * @param array $attrs
      * @return string
      */
-    protected function _elementTpl(array $inpAttrs, array $lblAttrs, $text)
+    protected function _elementTpl($name, $value = '', $id = '', $text = '', array $attrs = array())
     {
-        $input = '<input ' . $this->buildAttrs($inpAttrs) . '>';
-        $html  = '<label ' . $this->buildAttrs($lblAttrs) . '>' . $input . $text . '</label>';
+        $alias    = Str::slug($value, true);
+        $inpClass = 'jb-val-' . $alias;
+        $input    = $this->input($name, $value, $id, $inpClass, $attrs);
+        $text     = '<span class="label-title">' . $text . '</span>';
+        $html     = $this->label($id, $alias, $input . $text);
 
         return '<div class="jb-input jb-checkbox">' . $html . '</div>';
     }
