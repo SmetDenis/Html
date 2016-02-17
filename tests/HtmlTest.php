@@ -82,4 +82,79 @@ class HtmlTest extends PHPUnit
         isClass('JBZoo\Html\Render\Input', $Html->_('Input'));
         isClass('JBZoo\Html\Render\Input', $Html->_('input'));
     }
+
+    /**
+     * Test data attributes.
+     *
+     * @return void
+     */
+    public function testDataAttr()
+    {
+        $Html = Html::getInstance();
+
+        $expected = array(
+            'input' => array(
+                'data-test' => 'val',
+                'data-json' => "{'param-1':'val-1','param-2':'val-2'}",
+                'class'     => 'jb-input-text',
+                'name'      => 'test',
+                'value'     => 'val',
+                'type'      => 'text',
+            )
+        );
+
+        $input = $Html->_('input')->render('test', 'val', '', '', array(
+            'data' => array(
+                'test' => 'val',
+                'json' => array(
+                    'param-1' => 'val-1',
+                    'param-2' => 'val-2',
+                )
+            )
+        ));
+
+        isHtml($expected, $input);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $expected = array(
+            'input' => array(
+                'data-test' => 'val',
+                'data-json' => "{'param-1':'val-1','param-2':'val-2'}",
+                'class'     => 'jb-input-text',
+                'name'      => 'test',
+                'value'     => 'val',
+                'type'      => 'text',
+            )
+        );
+
+        $obj = (object) array(
+            'param-1' => 'val-1',
+            'param-2' => 'val-2',
+        );
+
+        $input = $Html->_('input')->render('test', 'val', '', '', array(
+            'data' => array(
+                'test' => 'val',
+                'json' => $obj,
+            )
+        ));
+
+        isHtml($expected, $input);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $expected = array(
+            'input' => array(
+                'class' => 'jb-input-text',
+                'name'  => 'test',
+                'value' => 'val',
+                'type'  => 'text',
+            )
+        );
+
+        $input = $Html->_('input')->render('test', 'val', '', '', array(
+            'data' => array(),
+        ));
+
+        isHtml($expected, $input);
+    }
 }

@@ -41,15 +41,65 @@ class Render
         $result = ' ';
         foreach ($attrs as $key => $param) {
             $param = (array) $param;
+            if ($key == 'data') {
+                $result .= $this->_buildDataAttrs($param);
+                continue;
+            }
+
             $value = implode(' ', $param);
             $value = $this->_cleanValue($value);
 
-            if (!empty($value) || $value == '0' || $key == 'value') {
-                $result .= ' ' . $key . '="' . $value . '"';
+            if ($key !== 'data' && $attr = $this->_buildAttr($key, $value)) {
+                $result .= $attr;
             }
         }
 
         return trim($result);
+    }
+
+    /**
+     * Build attribute.
+     *
+     * @param string $key
+     * @param string $val
+     * @return null|string
+     */
+    protected function _buildAttr($key, $val)
+    {
+        $return = null;
+        if (!empty($val) || $val == '0' || $key == 'value') {
+            $return = ' ' . $key . '="' . $val . '"';
+        }
+
+        return $return;
+    }
+
+    /**
+     * Build html data attributes.
+     *
+     * @param array $param
+     * @return null|string
+     */
+    protected function _buildDataAttrs(array $param = array())
+    {
+        $return = '';
+        foreach ($param as $data => $val) {
+            $dKey = 'data-' . trim($data);
+
+            if (is_object($val)) {
+                $val = (array )$val;
+            }
+
+            if (is_array($val)) {
+                $val = str_replace('"', '\'', json_encode($val));
+                $return .= $this->_buildAttr($dKey, $val);
+                continue;
+            }
+
+            $return .= $this->_buildAttr($dKey, $val);
+        }
+
+        return $return;
     }
 
     /**
