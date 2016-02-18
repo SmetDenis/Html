@@ -43,11 +43,12 @@ abstract class ButtonAbstract extends Render
      * Output content.
      *
      * @param string $name
+     * @param string $content
      * @param array $attrs
      * @param string $type
      * @return mixed
      */
-    abstract public function render($name = '', array $attrs = array(), $type = 'submit');
+    abstract public function render($name = '', $content = '', array $attrs = array(), $type = 'submit');
 
     /**
      * Create button classes.

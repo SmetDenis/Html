@@ -38,7 +38,7 @@ class Iframe extends Render
     /**
      * Create iframe.
      *
-     * @param $src
+     * @param string $src
      * @param string $class
      * @param string $id
      * @param array $attrs

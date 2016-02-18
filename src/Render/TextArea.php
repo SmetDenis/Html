@@ -33,7 +33,9 @@ class Textarea extends Render
     protected $_tag = 'textarea';
 
     /**
-     * @param $name
+     * Output content.
+     *
+     * @param string $name
      * @param string $content
      * @param array|string $class
      * @param string $id

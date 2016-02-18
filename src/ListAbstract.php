@@ -45,10 +45,44 @@ abstract class ListAbstract extends Render
     protected $_tpl = 'default';
 
     /**
+     * Create input.
+     *
+     * @param string $name
+     * @param string $value
+     * @param string $id
+     * @param string $class
+     * @param array $attrs
+     * @return string
+     */
+    public function input($name, $value = '', $id = '', $class = '', array $attrs = array())
+    {
+        return '<input id="' . $id . '" class="' . $class . '" type="' . $this->_type . '" name="' . $name . '"
+                          value="' . $value . '" ' . $this->buildAttrs($attrs) . '/>';
+    }
+
+    /**
+     * Create label tag.
+     *
+     * @param string $id
+     * @param string $valAlias
+     * @param string $content
+     * @return string
+     */
+    public function label($id, $valAlias, $content = '')
+    {
+        $class = implode(' ', array(
+            $this->_jbSrt($this->_type . '-lbl'),
+            $this->_jbSrt('label-' . $valAlias),
+        ));
+
+        return '<label for="' . $id . '" class="' . $class . '">' . $content . '</label>';
+    }
+
+    /**
      * Generates an HTML checkbox/radio list.
      *
      * @param array $options
-     * @param $name
+     * @param string $name
      * @param array $selected
      * @param string|array $attrs
      * @param bool $tpl
@@ -73,19 +107,30 @@ abstract class ListAbstract extends Render
     }
 
     /**
-     * Create input.
+     * Checked options.
      *
-     * @param string $name
      * @param string $value
-     * @param string $id
-     * @param string $class
+     * @param string|array $selected
      * @param array $attrs
-     * @return string
+     * @return array
      */
-    public function input($name, $value = '', $id = '', $class = '', array $attrs = array())
+    protected function _checkedOptions($value, $selected, array $attrs)
     {
-        return '<input id="' . $id . '" class="' . $class . '" type="' . $this->_type . '" name="' . $name . '"
-                          value="' . $value . '" ' . $this->buildAttrs($attrs) . '/>';
+        $attrs['checked'] = false;
+        if (is_array($selected)) {
+            foreach ($selected as $val) {
+                if ($value == $val) {
+                    $attrs['checked'] = 'checked';
+                    break;
+                }
+            }
+        } else {
+            if ($value == $selected) {
+                $attrs['checked'] = 'checked';
+            }
+        }
+
+        return $attrs;
     }
 
     /**
@@ -118,54 +163,9 @@ abstract class ListAbstract extends Render
     }
 
     /**
-     * Checked options.
-     *
-     * @param string $value
-     * @param string|array $selected
-     * @param array $attrs
-     * @return array
-     */
-    protected function _checkedOptions($value, $selected, array $attrs)
-    {
-        $attrs['checked'] = false;
-        if (is_array($selected)) {
-            foreach ($selected as $val) {
-                if ($value == $val) {
-                    $attrs['checked'] = 'checked';
-                    break;
-                }
-            }
-        } else {
-            if ($value == $selected) {
-                $attrs['checked'] = 'checked';
-            }
-        }
-
-        return $attrs;
-    }
-
-    /**
-     * Create label tag.
-     *
-     * @param string $id
-     * @param string $valAlias
-     * @param string $content
-     * @return string
-     */
-    public function label($id, $valAlias, $content = '')
-    {
-        $class = implode(' ', array(
-            $this->_jbSrt($this->_type . '-lbl'),
-            $this->_jbSrt('label-' . $valAlias),
-        ));
-
-        return '<label for="' . $id . '" class="' . $class . '">' . $content . '</label>';
-    }
-
-    /**
      * Setup template.
      *
-     * @param $tpl
+     * @param string $tpl
      * @return void
      */
     protected function _setTpl($tpl)

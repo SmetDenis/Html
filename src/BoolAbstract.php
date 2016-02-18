@@ -36,7 +36,7 @@ abstract class BoolAbstract extends Render
     /**
      * Output content.
      *
-     * @param $name
+     * @param string $name
      * @param array $attrs
      * @param int $checked
      * @param bool|true $isLblWrap

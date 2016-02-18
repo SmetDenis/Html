@@ -156,6 +156,23 @@ class Select extends ListAbstract
     }
 
     /**
+     * Check selected option.
+     *
+     * @param string $value
+     * @param array $selected
+     * @return bool
+     */
+    protected function _isSelected($value, array $selected = array())
+    {
+        $return = false;
+        if (in_array($value, $selected)) {
+            $return = true;
+        }
+
+        return $return;
+    }
+
+    /**
      * Create option.
      *
      * @param string $value
@@ -175,22 +192,5 @@ class Select extends ListAbstract
             '</option>';
 
         return $option;
-    }
-
-    /**
-     * Check selected option.
-     *
-     * @param string $value
-     * @param array $selected
-     * @return bool
-     */
-    protected function _isSelected($value, array $selected = array())
-    {
-        $return = false;
-        if (in_array($value, $selected)) {
-            $return = true;
-        }
-
-        return $return;
     }
 }

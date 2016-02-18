@@ -39,19 +39,19 @@ class ButtonTest extends PHPUnit
         isSame('<button name="test" type="submit"></button>', $button->render('test'));
         isSame('<button name="test" type="submit"></button>', $button->render('test'));
 
-        $actual = $button->render('test', array('text' => 'My button'));
+        $actual = $button->render('test', 'My button');
         isSame('<button name="test" type="submit">My button</button>', $actual);
 
-        $actual = $button->render('test', array('text' => 'Reset button'), 'reset');
+        $actual = $button->render('test', 'Reset button', array(), 'reset');
         isSame('<button name="test" type="reset">Reset button</button>', $actual);
 
-        $actual = $button->render('test', array('text' => 'My button', 'button' => 'success'));
+        $actual = $button->render('test', 'My button', array('button' => 'success'));
         isSame('<button name="test" class="uk-button uk-button-success" type="submit">My button</button>', $actual);
 
-        $actual = $button->render('test', array('text' => 'My button', 'button' => 'success', 'class' => 'my-class'));
+        $actual = $button->render('test', 'My button', array('button' => 'success', 'class' => 'my-class'));
         isSame('<button class="my-class uk-button uk-button-success" name="test" type="submit">My button</button>', $actual);
 
-        $actual   = $button->render('test', array('text' => 'My button', 'button' => 'success', 'icon' => 'stop'));
+        $actual   = $button->render('test', 'My button', array('button' => 'success', 'icon' => 'stop'));
         $expected = array(
             'button' => array('name' => 'test', 'class' => 'uk-button uk-button-success', 'type' => 'submit'),
                 'i' => array('class' => 'uk-icon-stop'), '/i',

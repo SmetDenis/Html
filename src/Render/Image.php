@@ -29,7 +29,7 @@ class Image extends Render
     /**
      * Create img tag.
      *
-     * @param $src
+     * @param string $src
      * @param string|array $class
      * @param string $id
      * @param array $attrs

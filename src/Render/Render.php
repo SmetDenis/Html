@@ -103,6 +103,24 @@ class Render
     }
 
     /**
+     * Remove disallow attributes.
+     *
+     * @param array $attrs
+     * @return array
+     * @SuppressWarnings("unused")
+     */
+    protected function _cleanAttrs(array $attrs = array())
+    {
+        foreach ($attrs as $key => $val) {
+            if (in_array($key, $this->_disallowAttr)) {
+                unset($attrs[$key]);
+            }
+        }
+
+        return $attrs;
+    }
+
+    /**
      * Clear attribute value
      *
      * @param $value
@@ -172,24 +190,6 @@ class Render
     {
         if (!empty($id)) {
             $attrs['id'] = $id;
-        }
-
-        return $attrs;
-    }
-
-    /**
-     * Remove disallow attributes.
-     *
-     * @param array $attrs
-     * @return array
-     * @SuppressWarnings("unused")
-     */
-    protected function _cleanAttrs(array $attrs = array())
-    {
-        foreach ($attrs as $key => $val) {
-            if (in_array($key, $this->_disallowAttr)) {
-                unset($attrs[$key]);
-            }
         }
 
         return $attrs;
