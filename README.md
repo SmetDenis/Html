@@ -17,7 +17,7 @@ use JBZoo\Html\Html;
 ```php
 echo Html::_('button')->render('test', 'Button', array('title' => 'title attr'));
 ```
-#### Output
+
 ```html
 <button title="title attr" name="test" type="submit">Button</button>
 ```
@@ -340,12 +340,12 @@ echo Html::_('select')->render(array(
 ```
 ```html
 <select method="post" name="test" class="jb-select">
+    <option value="no-value" class="jb-option jb-option-6" selected="selected">--No selected--</option>
     <option value="val-1" class="jb-option jb-option-1">Label 1</option>
     <option value="test" class="jb-option jb-option-2">Label test</option>
     <option value="custom" class="jb-option jb-option-3">Custom</option>
     <option value="simple" class="jb-option jb-option-4">Simple label</option>
     <option value="moscow" class="jb-option jb-option-5">Moscow</option>
-    <option value="no-value" class="jb-option jb-option-6" selected="selected">--No selected--</option>
 </select>
 ```
 ------------------------------------------------------------------------------------------------------------------------
