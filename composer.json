@@ -1,11 +1,16 @@
 {
     "name"              : "jbzoo/html",
     "type"              : "library",
-    "description"       : "",
+    "description"       : "HTML helper for easy way form building from any PHP code",
     "license"           : "MIT",
-    "keywords"          : ["skeleton", "travis", "phpunit", "composer", "github", "jbzoo", "packagist"],
+    "keywords"          : ["html", "render", "form", "controls", "rendering"],
     "minimum-stability" : "stable",
     "authors"           : [
+        {
+            "name"  : "Sergey Kalistratov",
+            "email" : "kalistratov.s.m@gmail.com",
+            "role"  : "developer"
+        },
         {
             "name"  : "SmetDenis",
             "email" : "denis@jbzoo.com",
@@ -25,9 +30,9 @@
             "JBZoo\\Html\\" : "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Custom\\Html\\Render\\": "./tests/custom"
+    "autoload-dev"      : {
+        "psr-4" : {
+            "Custom\\Html\\Render\\" : "./tests/custom"
         }
     },
     "extra"             : {
@@ -37,7 +42,7 @@
     },
     "config"            : {
         "optimize-autoloader" : true
-    },    
+    },
     "scripts"           : {
         "test"       : [
             "@manifest",
