@@ -64,16 +64,16 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
-                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-')),
                     'Space label',
                 '/option',
-                array('option' => array('value' => 'array', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'array', 'class' => 'jb-option jb-option-array')),
                     'Array label',
                 '/option',
             '/select'
@@ -86,16 +86,16 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
-                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-')),
                     'Space label',
                 '/option',
-                array('option' => array('value' => 'array', 'selected' => 'selected', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'array', 'selected' => 'selected', 'class' => 'jb-option jb-option-array')),
                     'Array label',
                 '/option',
             '/select'
@@ -108,16 +108,16 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
-                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-')),
                     'Space label',
                 '/option',
-                array('option' => array('value' => 'array', 'selected' => 'selected', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'array', 'selected' => 'selected', 'class' => 'jb-option jb-option-array')),
                     'Array label',
                 '/option',
             '/select'
@@ -130,20 +130,24 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array(
+                    'value' => 'array-1',
+                    'selected' => 'selected',
+                    'class' => 'jb-option jb-option-array-1'
+                )),
+                    '--No selected--',
+                '/option',
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
-                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => ' ', 'class' => 'jb-option jb-option-')),
                     'Space label',
                 '/option',
-                array('option' => array('value' => 'array', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'array', 'class' => 'jb-option jb-option-array')),
                     'Array label',
-                '/option',
-                array('option' => array('value' => 'array-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-5')),
-                    '--No selected--',
                 '/option',
             '/select'
         );
@@ -161,13 +165,13 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
-                array('option' => array('value' => ' ', 'selected' => 'selected', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => ' ', 'selected' => 'selected', 'class' => 'jb-option jb-option-')),
                     'Space label',
                 '/option',
             '/select'
@@ -195,16 +199,20 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'get', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('selected' => 'selected', 'value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array(
+                    'selected' => 'selected',
+                    'value' => 'test',
+                    'class' => 'jb-option jb-option-test'
+                )),
                     'Test label',
                 '/option',
-                array('option' => array('selected' => 'selected', 'value' => 'custom', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('selected' => 'selected', 'value' => 'custom', 'class' => 'jb-option jb-option-custom')),
                     'Custom label',
                 '/option',
-                array('option' => array('value' => 'test-val', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'test-val', 'class' => 'jb-option jb-option-test-val')),
                     'Test val label',
                 '/option',
             '/select'
@@ -228,16 +236,20 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'get', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('selected' => 'selected', 'value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array(
+                    'selected' => 'selected',
+                    'value' => 'test',
+                    'class' => 'jb-option jb-option-test'
+                )),
                     'Test label',
                 '/option',
-                array('option' => array('value' => 'custom', 'class' => 'jb-option jb-option-3')),
+                array('option' => array('value' => 'custom', 'class' => 'jb-option jb-option-custom')),
                     'Custom label',
                 '/option',
-                array('option' => array('value' => 'test-val', 'class' => 'jb-option jb-option-4')),
+                array('option' => array('value' => 'test-val', 'class' => 'jb-option jb-option-test-val')),
                     'Test val label',
                 '/option',
             '/select'
@@ -264,14 +276,14 @@ class SelectTest extends PHPUnit
 
         $expected = array(
             'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
                 array('optgroup' => array('label' => 'Select group 0')),
-                    'option' => array('class' => 'jb-option jb-option-0-1', 'value' => 'gr-test'),
+                    'option' => array('class' => 'jb-option jb-option-group-test-1', 'value' => 'gr-test'),
                         'Group test 1',
                     '/option',
                 '/optgroup',
@@ -279,20 +291,19 @@ class SelectTest extends PHPUnit
         );
 
         $actual = $this->select->render($options, 'test', array(), array('multiple' => true));
-
         isHtml($expected, $actual);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $expected = array(
             'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
                 array('optgroup' => array('label' => 'Select group 0')),
-                    'option' => array('class' => 'jb-option jb-option-0-1', 'selected' => 'selected', 'value' => 'gr-test'),
+                    'option' => array('class' => 'jb-option jb-option-group-test-1', 'selected' => 'selected', 'value' => 'gr-test'),
                         'Group test 1',
                     '/option',
                 '/optgroup',
@@ -300,20 +311,19 @@ class SelectTest extends PHPUnit
         );
 
         $actual = $this->select->render($options, 'test', array('gr-test', 'val-1'), array('multiple' => true));
-
         isHtml($expected, $actual);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $expected = array(
             'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
-                array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-1')),
+                array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
-                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-2')),
+                array('option' => array('value' => 'test', 'class' => 'jb-option jb-option-test')),
                     'Test label',
                 '/option',
                 array('optgroup' => array('label' => 'Select group 0')),
-                    'option' => array('class' => 'jb-option jb-option-0-1', 'value' => 'gr-test'),
+                    'option' => array('class' => 'jb-option jb-option-group-test-1', 'value' => 'gr-test'),
                         'Group test 1',
                     '/option',
                 '/optgroup',
@@ -321,7 +331,6 @@ class SelectTest extends PHPUnit
         );
 
         $actual = $this->select->render($options, 'test', 'val-1', array('multiple' => true));
-
         isHtml($expected, $actual);
     }
 }

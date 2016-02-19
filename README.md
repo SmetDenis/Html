@@ -332,6 +332,32 @@ echo Html::_('select')->render(array(
     <option value="moscow" class="jb-option jb-option-5">Moscow</option>
 </select>
 ```
+#### 4.4 Select group
+```php
+echo Html::_('select')->render(array(
+    'val-1' => 'Label 1',
+    'test'  => 'Test label',
+    array(
+        'gr-test' => 'Group test 1',
+        'val-1' => 'No exits in group',
+    )
+), 'test', array(
+        'test',
+        'moscow',
+        'no-value',
+    )
+);
+```
+```html
+<select method="post" name="test" class="jb-select">
+    <option value="no-value" class="jb-option jb-option-no-value" selected="selected">--No selected--</option>
+    <option value="val-1" class="jb-option jb-option-val-1">Label 1</option>
+    <option value="test" class="jb-option jb-option-test">Test label</option>
+    <optgroup label="Select group 0">
+        <option value="gr-test" class="jb-option jb-option-group-test-1">Group test 1</option>
+    </optgroup>
+</select>
+```
 ------------------------------------------------------------------------------------------------------------------------
 ## 5# Html form hidden
 #### 5.1 Single hidden input

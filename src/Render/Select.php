@@ -74,7 +74,7 @@ class Select extends ListAbstract
         $_selected = array_pop($selected);
 
         if (!array_key_exists($_selected, $options) && !empty($selected)) {
-            $options[$_selected] = $this->_translate('--No selected--');
+            $options = array_merge(array($_selected => $this->_translate('--No selected--')), $options);
         }
 
         return array($options, array($_selected));
@@ -91,7 +91,6 @@ class Select extends ListAbstract
      */
     protected function _createGroup($key, array $gOptions, array $selected, array $options)
     {
-        $count  = 0;
         $label  = (is_int($key)) ? sprintf($this->_translate('Select group %s'), $key) : $key;
         $output = array(
             '<optgroup label="' . $this->_translate($label) . '">'
@@ -101,11 +100,9 @@ class Select extends ListAbstract
                 continue;
             }
 
-            $count++;
-
             $classes = implode(' ', array(
                 $this->_jbSrt('option'),
-                $this->_jbSrt('option-' . Str::slug($key) . '-' . $count),
+                $this->_jbSrt('option-' . Str::slug($label)),
             ));
 
             $isSelected = $this->_isSelected($value, $selected);
@@ -128,19 +125,17 @@ class Select extends ListAbstract
      */
     protected function _getOptions(array $options, array $selected = array(), $isMultiple = false)
     {
-        $count  = 0;
         $output = array();
 
         list($options, $_selected) = $this->_checkNoSelected($options, $selected, $isMultiple);
 
         foreach ($options as $key => $data) {
-            $count++;
             $label = $data;
             $value = $key;
 
             $classes = implode(' ', array(
                 $this->_jbSrt('option'),
-                $this->_jbSrt('option-' . $count),
+                $this->_jbSrt('option-' . Str::slug($value, true)),
             ));
 
             $isSelected = $this->_isSelected($value, $_selected);

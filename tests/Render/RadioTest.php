@@ -215,6 +215,17 @@ class RadioTest extends PHPUnit
 
         $expected = array(
             array('input' => array(
+                'id'      => 'preg:/radio-[0-9]+/',
+                'name'    => 'test',
+                'type'    => 'radio',
+                'value'   => 'no-exits',
+                'class'   => 'jb-val-no-exits',
+                'checked' => 'checked',
+            )),
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
+                'No exits',
+            '/label',
+            array('input' => array(
                 'id'    => 'preg:/radio-[0-9]+/',
                 'name'  => 'test',
                 'type'  => 'radio',
@@ -233,17 +244,6 @@ class RadioTest extends PHPUnit
             )),
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-8')),
                 'Test label 8',
-            '/label',
-            array('input' => array(
-                'id'      => 'preg:/radio-[0-9]+/',
-                'name'    => 'test',
-                'type'    => 'radio',
-                'value'   => 'no-exits',
-                'class'   => 'jb-val-no-exits',
-                'checked' => 'checked',
-            )),
-            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
-                'No exits',
             '/label',
         );
 
@@ -257,6 +257,17 @@ class RadioTest extends PHPUnit
 
         $expected = array(
             array('input' => array(
+                'id'      => 'preg:/radio-[0-9]+/',
+                'name'    => 'test',
+                'type'    => 'radio',
+                'value'   => 'no-exits',
+                'class'   => 'jb-val-no-exits',
+                'checked' => 'checked',
+            )),
+            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
+                'No exits',
+            '/label',
+            array('input' => array(
                 'id'    => 'preg:/radio-[0-9]+/',
                 'name'  => 'test',
                 'type'  => 'radio',
@@ -275,17 +286,6 @@ class RadioTest extends PHPUnit
             )),
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-8')),
                 'Test label 8',
-            '/label',
-            array('input' => array(
-                'id'      => 'preg:/radio-[0-9]+/',
-                'name'    => 'test',
-                'type'    => 'radio',
-                'value'   => 'no-exits',
-                'class'   => 'jb-val-no-exits',
-                'checked' => 'checked',
-            )),
-            array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-no-exits')),
-                'No exits',
             '/label',
         );
 

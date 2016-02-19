@@ -65,9 +65,9 @@ class Radio extends ListAbstract
      */
     protected function _checkSelected(array $options, $selectedVal)
     {
-        if (!array_key_exists($selectedVal, $options)) {
+        if (!empty($selectedVal) && !array_key_exists($selectedVal, $options)) {
             $selectedVal = 'no-exits';
-            $options['no-exits'] = $this->_translate('No exits');
+            $options = array_merge(array('no-exits' => $this->_translate('No exits')), $options);
         }
 
         return array($options, $selectedVal);
