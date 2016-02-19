@@ -19,10 +19,11 @@ require_once './vendor/autoload.php'; // composer autoload.php
 // Get needed classes
 use JBZoo\Html\Html;
 
-echo Html::_('<RENDER_NAME>')->render( /* ... */ ); // Underscore as factory
+echo Html::_('input')->render( /* ... */ ); // Underscore as factory
 
-$html = Html::getInstance();                        // Create or get pimple container
-echo $html['<RENDER_NAME>']->render( /* ... */ );
+$html = Html::getInstance();                // Create or get pimple container
+echo $html['input']->render( /* ... */ );   // As array
+echo $html->input->render( /* ... */ );     // As object
 ```
 
 
@@ -99,8 +100,8 @@ echo Html::_('checkbool')->render(
     > Yes
 </label>
 ```
+## 3# Elements with list of options
 ------------------------------------------------------------------------------------------------------------------------
-## 3# Form checkbox/radio elements
 #### 3.1 Default checkbox template (No wrap)
 ```php
 echo Html::_('checkbox')->render(
@@ -318,7 +319,7 @@ echo Html::_('datalist')->render(
 ```
 
 
-## 4# Html form select
+## 4# Selects
 ------------------------------------------------------------------------------------------------------------------------
 #### 4.1 Simple select list
 ```php
@@ -423,7 +424,7 @@ echo Html::_('select')->render(
 ```
 
 
-## 5# Html form hidden
+## 5# Hiddens fields
 ------------------------------------------------------------------------------------------------------------------------
 #### 5.1 Single hidden input
 ```php
@@ -432,7 +433,7 @@ echo Html::_('hidden')->render('image', 'my-value', 'my-class', 'unique', array(
 ```html
 <input data-profile="user-1" id="unique" class="jb-input-hidden my-class" name="image" value="my-value" type="hidden">
 ```
-#### 5.2 Group hidden inputs
+#### 5.2 Group of hidden inputs
 ```php
 echo Html::_('hidden')->group(array(
     'my-name' => 'My name value',
@@ -451,7 +452,7 @@ echo Html::_('hidden')->group(array(
 ```
 
 
-## 6# Html Iframe
+## 6# Iframe
 ------------------------------------------------------------------------------------------------------------------------
 ```php
 echo Html::_('iframe')->render('http://my-site.com/page', 'my-class', 'my-id', array('data-rel' => 'my-iframe'));
@@ -462,7 +463,7 @@ echo Html::_('iframe')->render('http://my-site.com/page', 'my-class', 'my-id', a
 
 
 
-## 7# Html textarea
+## 7# Textarea
 ------------------------------------------------------------------------------------------------------------------------
 ```php
 echo Html::_('textarea')->render(
