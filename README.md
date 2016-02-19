@@ -17,7 +17,6 @@ use JBZoo\Html\Html;
 ```php
 echo Html::_('button')->render('test', 'Button', array('title' => 'title attr'));
 ```
-
 ```html
 <button title="title attr" name="test" type="submit">Button</button>
 ```
@@ -25,7 +24,6 @@ echo Html::_('button')->render('test', 'Button', array('title' => 'title attr'))
 ```php
 echo Html::_('button')->render('test', 'Button', array(), 'reset');
 ```
-#### Output
 ```html
 <button name="test" type="reset">Button</button>
 ```
@@ -36,7 +34,6 @@ echo Html::_('button')->render('test', 'My button', array(
     'class'  => 'my-class',
 ));
 ```
-#### Output
 ```html
 <button class="my-class uk-button uk-button-success" name="test" type="submit">
     My button
@@ -49,7 +46,6 @@ echo Html::_('button')->render('test', 'My button', array(
     'icon'   => 'stop',
 ));
 ```
-#### Output
 ```html
 <button name="test" class="uk-button uk-button-success" type="submit">
     <i class="uk-icon-stop"></i> My button
@@ -61,7 +57,6 @@ echo Html::_('button')->render('test', 'My button', array(
 ```php
 echo Html::_('radiobool')->render('show', 0);  // if 1 default set "Yes"
 ```
-#### Output
 ```html
 <label for="radio-322643" class="jb-radio-lbl jb-label-0">
     <input id="radio-322643" class="jb-val-0" type="radio" name="show" value="0" checked="checked">No
@@ -77,7 +72,6 @@ echo Html::_('checkbool')->render('show', 0, array(
     'data-title' => 'Checkbox title',
 ));
 ```
-#### Output
 ```html
 <label for="checkbox-270924" class="jb-checkbox-lbl jb-label-1">
      <input id="checkbox-270924" data-rel="tooltip" data-title="Checkbox title" class="jb-val-1" type="checkbox" name="show" value="1">Yes
@@ -93,7 +87,6 @@ echo Html::_('checkbox')->render(array(
     'val-3' => 'Var 3',
 ), 'test', array('val-1', 'val-3'), array('data-rel' => 'tooltip'));
 ```
-#### Output
 ```html
 <input id="checkbox-405099" class="jb-val-val-1" type="checkbox" name="test" value="val-1" data-rel="tooltip" checked="checked">
 <label for="checkbox-405099" class="jb-checkbox-lbl jb-label-val-1">Label 1</label>
@@ -110,7 +103,6 @@ echo Html::_('checkbox')->render(array(
     'val-3' => 'Var 3',
 ), 'test', array('val-1', 'val-3'), array('data-rel' => 'tooltip'));
 ```
-#### Output
 ```html
 <label for="checkbox-301932" class="jb-checkbox-lbl jb-label-val-1">
     <input id="checkbox-301932" class="jb-val-val-1" type="checkbox" name="test" value="val-1" checked="checked">Label 1
@@ -141,7 +133,6 @@ echo Html::_('checkbox')->render(array(
     }
 );
 ```
-#### Output
 ```html
 <input id="checkbox-491721" class="jb-val-val-1" type="checkbox" name="test" value="val-1" checked="checked">
 <label for="checkbox-491721" class="jb-checkbox-lbl jb-label-val-1">
@@ -164,7 +155,6 @@ echo Html::_('radio')->render(array(
     'val-3' => 'Var 3',
 ), 'test', array('val-1', 'val-3'), array('data-rel' => 'tooltip'));
 ```
-#### Output
 ```html
 <input id="radio-170734" class="jb-val-val-1" type="radio" name="test" value="val-1" data-rel="tooltip">
 <label for="radio-170734" class="jb-radio-lbl jb-label-val-1">Label 1</label>
@@ -181,7 +171,6 @@ echo Html::_('radio')->render(array(
     'val-3' => 'Var 3',
 ), 'test', 'val-1', array(), true);
 ```
-#### Output
 ```html
 <label for="radio-336365" class="jb-radio-lbl jb-label-val-1">
     <input id="radio-336365" class="jb-val-val-1" type="radio" name="test" value="val-1" checked="checked">Label 1
@@ -212,7 +201,6 @@ echo Html::_('radio')->render(array(
     }
 );
 ```
-#### Output
 ```html
 <input id="radio-491721" class="jb-val-val-1" type="radio" name="test" value="val-1" checked="checked">
 <label for="radio-491721" class="jb-radio-lbl jb-label-val-1">
@@ -235,7 +223,6 @@ echo Html::_('radio')->render(array(
     'val-3' => 'Var 3',
 ), 'test', 'val-8', array(), true);
 ```
-#### Output
 ```html
 <label for="radio-336365" class="jb-radio-lbl jb-label-val-1">
     <input id="radio-336365" class="jb-val-val-1" type="radio" name="test" value="val-1">Label 1
@@ -264,7 +251,6 @@ echo Html::_('datalist')->render(
     )
 );
 ```
-#### Output
 ```html
 <dl class="test jb-data-list" id="custom">
     <dt title="Label">Label</dt>
@@ -285,7 +271,6 @@ echo Html::_('select')->render(array(
     'data-title' => 'My form select',
 ));
 ```
-#### Output
 ```html
 <select data-title="My form select" method="post" name="test" class="jb-select">
     <option value="val-1" class="jb-option jb-option-1">Label 1</option>
@@ -309,7 +294,6 @@ echo Html::_('select')->render(array(
     'multiple' => true,
 ));
 ```
-#### Output
 ```html
 <select method="get" multiple="1" name="test[]" class="jb-select">
     <option value="val-1" class="jb-option jb-option-1">Label 1</option>
@@ -356,7 +340,6 @@ echo Html::_('hidden')->render('image', 'my-value', 'my-class', 'unique', array(
     'data-profile' => 'user-1'
 ));
 ```
-#### Output
 ```html
 <input data-profile="user-1" id="unique" class="jb-input-hidden my-class" name="image" value="my-value" type="hidden">
 ```
@@ -372,7 +355,6 @@ echo Html::_('hidden')->group(array(
     ),
 ));
 ```
-#### Output
 ```html
 <input class="jb-input-hidden" name="my-name" value="My name value" type="hidden">
 <input class="jb-input-hidden" name="user" value="Administrator" type="hidden">
@@ -385,7 +367,6 @@ echo Html::_('iframe')->render('http://my-site.com/page', 'my-class', 'my-id', a
     'data-rel' => 'my-iframe',
 ));
 ```
-#### Output
 ```html
 <iframe data-rel="my-iframe" frameborder="0" src="http://my-site.com/page" id="my-id" class="my-class"></iframe>
 ```
@@ -397,7 +378,6 @@ echo Html::_('textarea')->render('test', 'Text area content', 'my-class', 'my-id
     'data-title' => 'Enter description',
 ));
 ```
-#### Output
 ```html
 <textarea data-rel="tooltip" data-title="Enter description" name="test" id="my-id" class="my-class">
 Text area content
@@ -411,7 +391,22 @@ echo Html::_('tag')->render('My content', 'custom-class', 'unique', array(
     'title' => 'Custom title'
 ));
 ```
-#### Output
 ```html
 <div title="Custom title" id="unique" class="custom-class">My content</div>
+```
+------------------------------------------------------------------------------------------------------------------------
+## 8# Data attr builder
+```php
+echo Html::_('input')->render('test', 'My value', '', '', array(
+    'data' => array(
+        'test' => 'val',
+        'json' => array(
+            'param-1' => 'val-1',
+            'param-2' => 'val-2',
+        )
+    )
+));
+```
+```html
+<input data-test="val" data-json="{'param-1':'val-1','param-2':'val-2'}" class="jb-input-text" name="test" value="My value" type="text">
 ```
