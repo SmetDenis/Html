@@ -15,6 +15,8 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
+
 /**
  * Class Hidden
  *
@@ -60,17 +62,18 @@ class Hidden extends Input
     protected function _findMainAttr(array $data)
     {
         $id = $class = $value = '';
-        if (isset($data['value'])) {
+
+        if (Arr::key('value', $data)) {
             $value = $data['value'];
             unset($data['value']);
         }
 
-        if (isset($data['class'])) {
+        if (Arr::key('class', $data)) {
             $class = $data['class'];
             unset($data['class']);
         }
 
-        if (isset($data['id'])) {
+        if (Arr::key('id', $data)) {
             $id = $data['id'];
             unset($data['id']);
         }

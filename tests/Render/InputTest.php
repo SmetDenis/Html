@@ -81,19 +81,19 @@ class InputTest extends PHPUnit
     public function testInputText()
     {
         $actual   = $this->input->render('image', 'my-value');
-        $expected = '<input class="jb-input-text" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" class="jb-input-text" />';
         isSame($expected, $actual);
 
         $actual   = $this->input->render('image', 'my-value', 'simple');
-        $expected = '<input class="jb-input-text simple" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" class="jb-input-text simple" />';
         isSame($expected, $actual);
 
         $actual   = $this->input->render('image', 'my-value', array('simple', 'array'));
-        $expected = '<input class="jb-input-text simple array" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" class="jb-input-text simple array" />';
         isSame($expected, $actual);
 
         $actual   = $this->input->render('image', 'my-value', 'simple', 'unique');
-        $expected = '<input id="unique" class="jb-input-text simple" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" id="unique" class="jb-input-text simple" />';
         isSame($expected, $actual);
 
         $actual = $this->input->render('image', 'my-value', 'simple', 'unique', array(
@@ -103,7 +103,7 @@ class InputTest extends PHPUnit
             'value' => 'test value',
         ));
 
-        $expected = '<input id="unique" class="jb-input-text simple" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" id="unique" class="jb-input-text simple" />';
         isSame($expected, $actual);
 
         $actual = $this->input->render('image', 'my-value', '', '', array(
@@ -111,7 +111,7 @@ class InputTest extends PHPUnit
             'data-position' => 'top',
         ));
 
-        $expected = '<input data-toggle="tooltip" data-position="top" class="jb-input-text" name="image" value="my-value" type="text" />';
+        $expected = '<input name="image" value="my-value" type="text" data-toggle="tooltip" data-position="top" class="jb-input-text" />';
         isSame($expected, $actual);
     }
 }

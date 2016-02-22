@@ -16,6 +16,7 @@
 namespace JBZoo\Html;
 
 use JBZoo\Path\Path;
+use JBZoo\Utils\Arr;
 use JBZoo\Utils\Str;
 use Pimple\Container;
 

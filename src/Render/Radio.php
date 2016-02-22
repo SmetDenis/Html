@@ -15,6 +15,7 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
 use JBZoo\Html\ListAbstract;
 
 /**
@@ -24,6 +25,8 @@ use JBZoo\Html\ListAbstract;
  */
 class Radio extends ListAbstract
 {
+
+    const KEY_NO_EXITS_VAL = 'no-exits';
 
     /**
      * Setup radio type.
@@ -45,7 +48,8 @@ class Radio extends ListAbstract
     public function render(array $options, $name, $selected = array(), array $attrs = array(), $tpl = false)
     {
         if (is_array($selected)) {
-            $selectedVal = isset($selected[count($selected) - 1]) ? $selected[count($selected) - 1] : null;
+            $last = Arr::last($selected);
+            $selectedVal = Arr::in($last, $selected) ? $last : null;
             list($options, $selected) = $this->_checkSelected($options, $selectedVal);
         }
 
@@ -65,9 +69,9 @@ class Radio extends ListAbstract
      */
     protected function _checkSelected(array $options, $selectedVal)
     {
-        if (!empty($selectedVal) && !array_key_exists($selectedVal, $options)) {
-            $selectedVal = 'no-exits';
-            $options = array_merge(array('no-exits' => $this->_translate('No exits')), $options);
+        if (!empty($selectedVal) && !Arr::key($selectedVal, $options)) {
+            $selectedVal = self::KEY_NO_EXITS_VAL;
+            $options = array_merge(array(self::KEY_NO_EXITS_VAL => $this->_translate('No exits')), $options);
         }
 
         return array($options, $selectedVal);

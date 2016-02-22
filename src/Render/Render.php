@@ -15,6 +15,8 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
+
 /**
  * Class Render
  *
@@ -41,7 +43,7 @@ class Render
         $result = ' ';
         foreach ($attrs as $key => $param) {
             $param = (array) $param;
-            if ($key == 'data') {
+            if ($key === 'data') {
                 $result .= $this->_buildDataAttrs($param);
                 continue;
             }
@@ -67,7 +69,7 @@ class Render
     protected function _buildAttr($key, $val)
     {
         $return = null;
-        if (!empty($val) || $val == '0' || $key == 'value') {
+        if (!empty($val) || $val === '0' || $key === 'value') {
             $return = ' ' . $key . '="' . $val . '"';
         }
 
@@ -87,7 +89,7 @@ class Render
             $dKey = 'data-' . trim($data);
 
             if (is_object($val)) {
-                $val = (array )$val;
+                $val = (array) $val;
             }
 
             if (is_array($val)) {
@@ -112,7 +114,7 @@ class Render
     protected function _cleanAttrs(array $attrs = array())
     {
         foreach ($attrs as $key => $val) {
-            if (in_array($key, $this->_disallowAttr)) {
+            if (Arr::in($key, $this->_disallowAttr)) {
                 unset($attrs[$key]);
             }
         }
@@ -154,12 +156,11 @@ class Render
      */
     protected function _mergeAttr(array $attrs = array(), $val = null, $key = 'class')
     {
-        if (isset($attrs[$key])) {
+        if (Arr::key($key, $attrs)) {
             $attrs[$key] .= ' ' . $val;
         } else {
             $attrs[$key] = $val;
         }
-
         return $attrs;
     }
 
@@ -188,7 +189,7 @@ class Render
      */
     protected function _setId(array $attrs, $id = '')
     {
-        if (!empty($id)) {
+        if ($id !== '') {
             $attrs['id'] = $id;
         }
 

@@ -49,7 +49,7 @@ class ButtonTest extends PHPUnit
         isSame('<button name="test" class="uk-button uk-button-success" type="submit">My button</button>', $actual);
 
         $actual = $button->render('test', 'My button', array('button' => 'success', 'class' => 'my-class'));
-        isSame('<button class="my-class uk-button uk-button-success" name="test" type="submit">My button</button>', $actual);
+        isSame('<button name="test" class="my-class uk-button uk-button-success" type="submit">My button</button>', $actual);
 
         $actual   = $button->render('test', 'My button', array('button' => 'success', 'icon' => 'stop'));
         $expected = array(

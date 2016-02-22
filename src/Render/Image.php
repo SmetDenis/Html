@@ -16,6 +16,7 @@
 namespace JBZoo\Html\Render;
 
 use JBZoo\Utils\FS;
+use JBZoo\Utils\Str;
 use JBZoo\Utils\Url;
 
 /**
@@ -37,18 +38,18 @@ class Image extends Render
      */
     public function render($src, $class = '', $id = '', array $attrs = array())
     {
-        $attrs['class'] = null;
+        $attrs['class'] = false;
 
-        $attrs += array(
-            'fullUrl' => true
-        );
+        $attrs = array_merge(array('fullUrl' => true), $attrs);
 
         $attrs['id'] = $id;
 
         $attrs = $this->_normalizeClassAttr($attrs, $this->_jbSrt('image'));
-        if (!empty($class)) {
+        if ($class !== '') {
             $attrs = $this->_normalizeClassAttr($attrs, $class);
         }
+
+        $attrs['class'] = Str::clean($attrs['class']);
 
         $isFull = $attrs['fullUrl'];
         unset($attrs['fullUrl']);

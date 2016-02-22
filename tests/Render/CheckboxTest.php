@@ -70,7 +70,7 @@ class CheckboxTest extends PHPUnit
                     'class'   => 'jb-val-0',
                     'checked' => 'checked',
                 )),
-                'val-1',
+                ' val-1',
             '/label',
             array('label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-1'),
                 'input' => array(
@@ -80,7 +80,7 @@ class CheckboxTest extends PHPUnit
                     'value' => 1,
                     'class' => 'jb-val-1'
                 )),
-                'val-2',
+                ' val-2',
             '/label',
             array('label' => array('for' => 'preg:/checkbox-[0-9]+/', 'class' => 'jb-checkbox-lbl jb-label-2'),
                 'input' => array(
@@ -91,7 +91,7 @@ class CheckboxTest extends PHPUnit
                     'class'   => 'jb-val-2',
                     'checked' => 'checked',
                 )),
-                'val-3',
+                ' val-3',
             '/label',
         );
 

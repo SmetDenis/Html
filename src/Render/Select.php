@@ -15,6 +15,7 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
 use JBZoo\Utils\Str;
 use JBZoo\Html\ListAbstract;
 
@@ -40,12 +41,15 @@ class Select extends ListAbstract
     {
         $selected = (array) $selected;
 
-        $attrs += array(
-            'multiple' => false,
-            'method'   => 'post'
-        );
+        $attrs = array_merge(array('multiple' => false), $attrs);
 
-        if ($attrs['multiple'] === true && !strpos($name, '[]')) {
+        if ($attrs['multiple'] === true) {
+            $attrs['multiple'] = 'multiple';
+        } else {
+            unset($attrs['multiple']);
+        }
+
+        if ($attrs['multiple'] === 'multiple' && !strpos($name, '[]')) {
             $name .= '[]';
         }
 
@@ -67,13 +71,13 @@ class Select extends ListAbstract
      */
     protected function _checkNoSelected(array $options, array $selected, $isMultiply = false)
     {
-        if ($isMultiply === true) {
+        if ($isMultiply === 'multiple') {
             return array($options, $selected);
         }
 
         $_selected = array_pop($selected);
 
-        if (!array_key_exists($_selected, $options) && !empty($selected)) {
+        if (!Arr::key($_selected, $options) && !empty($selected)) {
             $options = array_merge(array($_selected => $this->_translate('--No selected--')), $options);
         }
 
@@ -96,7 +100,7 @@ class Select extends ListAbstract
             '<optgroup label="' . $this->_translate($label) . '">'
         );
         foreach ($gOptions as $value => $label) {
-            if (array_key_exists($value, $options)) {
+            if (Arr::key($value, $options)) {
                 continue;
             }
 
@@ -160,7 +164,7 @@ class Select extends ListAbstract
     protected function _isSelected($value, array $selected = array())
     {
         $return = false;
-        if (in_array($value, $selected)) {
+        if (Arr::in($value, $selected)) {
             $return = true;
         }
 

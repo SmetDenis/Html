@@ -55,19 +55,19 @@ class HiddenTest extends PHPUnit
     public function testInputText()
     {
         $actual   = $this->hidden->render('image', 'my-value');
-        $expected = '<input class="jb-input-hidden" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" class="jb-input-hidden" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', 'simple');
-        $expected = '<input class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" class="jb-input-hidden simple" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', array('simple', 'array'));
-        $expected = '<input class="jb-input-hidden simple array" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" class="jb-input-hidden simple array" />';
         isSame($expected, $actual);
 
         $actual   = $this->hidden->render('image', 'my-value', 'simple', 'unique');
-        $expected = '<input id="unique" class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" id="unique" class="jb-input-hidden simple" />';
         isSame($expected, $actual);
 
         $actual = $this->hidden->render('image', 'my-value', 'simple', 'unique', array(
@@ -77,7 +77,7 @@ class HiddenTest extends PHPUnit
             'value' => 'test value',
         ));
 
-        $expected = '<input id="unique" class="jb-input-hidden simple" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" id="unique" class="jb-input-hidden simple" />';
         isSame($expected, $actual);
 
         $actual = $this->hidden->render('image', 'my-value', '', '', array(
@@ -85,7 +85,7 @@ class HiddenTest extends PHPUnit
             'data-position' => 'top',
         ));
 
-        $expected = '<input data-toggle="tooltip" data-position="top" class="jb-input-hidden" name="image" value="my-value" type="hidden" />';
+        $expected = '<input name="image" value="my-value" type="hidden" data-toggle="tooltip" data-position="top" class="jb-input-hidden" />';
         isSame($expected, $actual);
     }
 

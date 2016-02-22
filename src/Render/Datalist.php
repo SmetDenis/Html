@@ -33,7 +33,7 @@ class Datalist extends Render
     public function render(array $data, array $attrs = array())
     {
         $output = array();
-        $attrs  += array('class' => 'uk-description-list-horizontal');
+        $attrs  = array_merge(array('class' => 'uk-description-list-horizontal'), $attrs);
         $attrs  = $this->_mergeAttr($attrs, $this->_jbSrt('data-list'));
 
         $output[] = '<dl ' . $this->buildAttrs($attrs) . '>';

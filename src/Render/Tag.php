@@ -15,6 +15,7 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
 use JBZoo\Html\TagAbstract;
 
 /**
@@ -53,7 +54,7 @@ class Tag extends TagAbstract
         }
 
         $tag = $this->_tag;
-        if (isset($attrs['tag'])) {
+        if (Arr::key('tag', $attrs)) {
             $tag = $attrs['tag'];
             unset($attrs['tag']);
         }

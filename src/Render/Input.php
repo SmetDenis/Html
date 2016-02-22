@@ -63,11 +63,11 @@ class Input extends InputAbstract
             $attrs = $this->_normalizeClassAttr($attrs, $class);
         }
 
-        $attrs += array(
+        $attrs = array_merge(array(
             'name'  => $name,
             'value' => $value,
             'type'  => $this->_type
-        );
+        ), $attrs);
 
         return '<input ' . $this->buildAttrs($attrs) . ' />';
     }

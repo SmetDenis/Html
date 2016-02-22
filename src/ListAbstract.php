@@ -93,9 +93,9 @@ abstract class ListAbstract extends Render
         $output = array();
         $this->_setTpl($tpl);
 
-        $id = Str::unique($this->_type . '-');
         foreach ($options as $value => $label) {
             $label = trim($label);
+            $id    = Str::unique($this->_type . '-');
             $value = $this->_cleanValue($value);
             $text  = $this->_translate($label);
             $attrs = $this->_checkedOptions($value, $selected, $attrs);
@@ -149,10 +149,10 @@ abstract class ListAbstract extends Render
         $inpClass = $this->_jbSrt('val-' . $alias);
         $input    = $this->input($name, $value, $id, $inpClass, $attrs);
 
-        if ($this->_tpl == 'default') {
+        if ($this->_tpl === 'default') {
             return $input . $this->label($id, $alias, $text);
-        } elseif ($this->_tpl == 'wrap') {
-            return $this->label($id, $alias, $input . $text);
+        } elseif ($this->_tpl === 'wrap') {
+            return $this->label($id, $alias, $input . ' ' . $text);
         }
 
         if (is_callable($this->_tpl)) {

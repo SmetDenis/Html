@@ -15,6 +15,7 @@
 
 namespace JBZoo\Html;
 
+use JBZoo\Utils\Arr;
 use JBZoo\Html\Render\Render;
 
 /**
@@ -58,7 +59,7 @@ abstract class ButtonAbstract extends Render
      */
     protected function _getBtnClasses(array $attrs = array())
     {
-        if (isset($attrs['button'])) {
+        if (Arr::key('button', $attrs)) {
             $classes = array($this->_btm);
             foreach ((array) $attrs['button'] as $btn) {
                 $classes[] = $this->_btm . '-' . $btn;

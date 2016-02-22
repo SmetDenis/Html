@@ -45,7 +45,7 @@ class BooleansTest extends PHPUnit
                     'class'   => 'jb-val-0',
                     'checked' => 'checked',
                 )),
-                'No',
+                ' No',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-1'),
                 'input' => array(
@@ -55,7 +55,7 @@ class BooleansTest extends PHPUnit
                     'value'   => 1,
                     'class'   => 'jb-val-1',
                 )),
-                'Yes',
+                ' Yes',
             '/label',
         );
 
@@ -111,7 +111,7 @@ class BooleansTest extends PHPUnit
                     'value' => 1,
                     'class' => 'jb-val-1',
                 ),
-                'Yes',
+                ' Yes',
             '/label'
         );
 

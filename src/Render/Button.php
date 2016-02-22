@@ -15,6 +15,7 @@
 
 namespace JBZoo\Html\Render;
 
+use JBZoo\Utils\Arr;
 use JBZoo\Html\ButtonAbstract;
 
 /**
@@ -36,12 +37,12 @@ class Button extends ButtonAbstract
      */
     public function render($name = '', $content = '', array $attrs = array(), $type = 'submit')
     {
-        $attrs += array('text' => null, 'name' => $name);
+        $attrs = array_merge(array('text' => null, 'name' => $name), $attrs);
 
         $attrs = $this->_getBtnClasses($attrs);
         $attrs['type'] = $type;
 
-        if (isset($attrs['icon'])) {
+        if (Arr::key('icon', $attrs)) {
             $content = '<i class="' . $this->_icon . '-' . $attrs['icon'] . '"></i> ' . $this->_translate($content);
             unset($attrs['icon']);
         }

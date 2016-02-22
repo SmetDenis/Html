@@ -63,7 +63,7 @@ class SelectTest extends PHPUnit
         $actual = $this->select->render($options, 'test');
 
         $expected = array(
-            'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -85,7 +85,7 @@ class SelectTest extends PHPUnit
         $actual = $this->select->render($options, 'test', 'array');
 
         $expected = array(
-            'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -107,7 +107,7 @@ class SelectTest extends PHPUnit
         $actual = $this->select->render($options, 'test', array(' ', 'array'));
 
         $expected = array(
-            'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -129,11 +129,11 @@ class SelectTest extends PHPUnit
         $actual = $this->select->render($options, 'test', array(' ', 'array-1'));
 
         $expected = array(
-            'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test', 'class' => 'jb-select'),
                 array('option' => array(
-                    'value' => 'array-1',
+                    'value'    => 'array-1',
                     'selected' => 'selected',
-                    'class' => 'jb-option jb-option-array-1'
+                    'class'    => 'jb-option jb-option-array-1'
                 )),
                     '--No selected--',
                 '/option',
@@ -164,7 +164,7 @@ class SelectTest extends PHPUnit
         $actual = $this->select->render($options, 'test', array(' '));
 
         $expected = array(
-            'select' => array('name' => 'test', 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -181,9 +181,9 @@ class SelectTest extends PHPUnit
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $options = array(
-            'val-1' => 'Label 1',
-            'test' => 'Test label',
-            'custom' => 'Custom label',
+            'val-1'    => 'Label 1',
+            'test'     => 'Test label',
+            'custom'   => 'Custom label',
             'test-val' => 'Test val label',
         );
 
@@ -198,7 +198,7 @@ class SelectTest extends PHPUnit
         ));
 
         $expected = array(
-            'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'get', 'class' => 'jb-select'),
+            'select' => array('name' => 'test[]', 'multiple' => 'multiple', 'method' => 'get', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -235,7 +235,7 @@ class SelectTest extends PHPUnit
         ));
 
         $expected = array(
-            'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'get', 'class' => 'jb-select'),
+            'select' => array('name' => 'test[]', 'multiple' => 'multiple', 'method' => 'get', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -275,7 +275,7 @@ class SelectTest extends PHPUnit
         );
 
         $expected = array(
-            'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test[]', 'multiple' => 'multiple', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -295,7 +295,7 @@ class SelectTest extends PHPUnit
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $expected = array(
-            'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test[]', 'multiple' => 'multiple', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',
@@ -315,7 +315,7 @@ class SelectTest extends PHPUnit
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $expected = array(
-            'select' => array('name' => 'test[]', 'multiple' => 1, 'method' => 'post', 'class' => 'jb-select'),
+            'select' => array('name' => 'test[]', 'multiple' => 'multiple', 'class' => 'jb-select'),
                 array('option' => array('value' => 'val-1', 'selected' => 'selected', 'class' => 'jb-option jb-option-val-1')),
                     'Label 1',
                 '/option',

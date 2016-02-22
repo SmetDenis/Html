@@ -71,7 +71,7 @@ class RadioTest extends PHPUnit
                     'value' => 0,
                     'class' => 'jb-val-0'
                 )),
-                'val-1',
+                ' val-1',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-1'),
                 'input' => array(
@@ -81,7 +81,7 @@ class RadioTest extends PHPUnit
                     'value' => 1,
                     'class' => 'jb-val-1'
                 )),
-                'val-2',
+                ' val-2',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-2'),
                 'input' => array(
@@ -91,7 +91,7 @@ class RadioTest extends PHPUnit
                     'value' => 2,
                     'class' => 'jb-val-2'
                 )),
-                'val-3',
+                ' val-3',
             '/label',
         );
 
@@ -116,7 +116,7 @@ class RadioTest extends PHPUnit
                     'value' => '&lt;p&gt;tag&lt;/p&gt;',
                     'class' => 'jb-val-lt-p-gt-tag-lt-p-gt'
                 )),
-                'Tag',
+                ' Tag',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-'),
                 'input' => array(
@@ -126,7 +126,7 @@ class RadioTest extends PHPUnit
                     'value' => ' ',
                     'class' => 'jb-val-'
                 )),
-                'Empty',
+                ' Empty',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-quot-test-label-3-quot'),
                 'input' => array(
@@ -136,7 +136,7 @@ class RadioTest extends PHPUnit
                     'value' => '&quot;Test label 3&quot;',
                     'class' => 'jb-val-quot-test-label-3-quot'
                 )),
-                'Custom',
+                ' Custom',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-znachenie'),
                 'input' => array(
@@ -146,7 +146,7 @@ class RadioTest extends PHPUnit
                     'value' => 'значение',
                     'class' => 'jb-val-znachenie'
                 )),
-                'Translate cyrillic value',
+                ' Translate cyrillic value',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
                 'input' => array(
@@ -157,7 +157,7 @@ class RadioTest extends PHPUnit
                     'class'   => 'jb-val-common',
                     'checked' => 'checked',
                 )),
-                'Common label',
+                ' Common label',
             '/label',
         );
 
@@ -180,7 +180,7 @@ class RadioTest extends PHPUnit
                     'value' => '&quot;Test label 3&quot;',
                     'class' => 'jb-val-quot-test-label-3-quot'
                 )),
-                'Custom',
+                ' Custom',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-znachenie'),
                 'input' => array(
@@ -190,7 +190,7 @@ class RadioTest extends PHPUnit
                     'value' => 'значение',
                     'class' => 'jb-val-znachenie'
                 )),
-                'Translate cyrillic value',
+                ' Translate cyrillic value',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
                 'input' => array(
@@ -201,7 +201,7 @@ class RadioTest extends PHPUnit
                     'class'   => 'jb-val-common',
                     'checked' => 'checked',
                 )),
-                'Common label',
+                ' Common label',
             '/label',
         );
 
@@ -313,7 +313,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-1',
                     'class' => 'jb-val-test-1'
                 )),
-                'Test label 1',
+                ' Test label 1',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-2'),
                 'input' => array(
@@ -323,7 +323,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-2',
                     'class' => 'jb-val-test-2',
                 )),
-                'Test label 2',
+                ' Test label 2',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-3'),
                 'input' => array(
@@ -333,7 +333,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-3',
                     'class' => 'jb-val-test-3'
                 )),
-                'Test label 3',
+                ' Test label 3',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-4'),
                 'input' => array(
@@ -344,7 +344,7 @@ class RadioTest extends PHPUnit
                     'class'   => 'jb-val-test-4',
                     'checked' => 'checked',
                 )),
-                'Test label 4',
+                ' Test label 4',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-6'),
                 'input' => array(
@@ -354,7 +354,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-6',
                     'class' => 'jb-val-test-6'
                 )),
-                'Test label 6',
+                ' Test label 6',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-7'),
                 'input' => array(
@@ -364,7 +364,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-7',
                     'class' => 'jb-val-test-7'
                 )),
-                'Test label 7',
+                ' Test label 7',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-test-8'),
                 'input' => array(
@@ -374,7 +374,7 @@ class RadioTest extends PHPUnit
                     'value' => 'test-8',
                     'class' => 'jb-val-test-8',
                 )),
-                'Test label 8',
+                ' Test label 8',
             '/label',
             array('label' => array('for' => 'preg:/radio-[0-9]+/', 'class' => 'jb-radio-lbl jb-label-common'),
                 'input' => array(
@@ -384,7 +384,7 @@ class RadioTest extends PHPUnit
                     'value' => 'common',
                     'class' => 'jb-val-common',
                 )),
-                'Common label',
+                ' Common label',
             '/label',
         );
 

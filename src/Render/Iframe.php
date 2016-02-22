@@ -46,12 +46,12 @@ class Iframe extends Render
      */
     public function render($src, $class = '', $id = '', array $attrs = array())
     {
-        $attrs += array(
+        $attrs = array_merge(array(
             'frameborder' => 0,
             'content'     => null,
             'tag'         => 'iframe',
             'src'         => Str::trim($src)
-        );
+        ), $attrs);
 
         $attrs   = $this->_cleanAttrs($attrs);
         $content = $attrs['content'];
