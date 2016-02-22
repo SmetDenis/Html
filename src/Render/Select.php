@@ -45,8 +45,6 @@ class Select extends ListAbstract
 
         if ($attrs['multiple'] === true) {
             $attrs['multiple'] = 'multiple';
-        } else {
-            unset($attrs['multiple']);
         }
 
         if ($attrs['multiple'] === 'multiple' && !strpos($name, '[]')) {
