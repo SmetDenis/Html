@@ -6,27 +6,26 @@ php:
   - 5.5
   - 5.6
   - 7.0
-
-env:
-  matrix:
-    - DEBUG=1
+  - '7.1.0alpha1'
+  - hhvm
 
 matrix:
   fast_finish: true
-
+  allow_failures:
+    - php: '7.1.0alpha1'
+    - php: hhvm
   include:
     - php: 5.6
-      env: DEBUG=0
-
+      env: XDEBUG_OFF="yes"
     - php: 7.0
-      env: DEBUG=0
+      env: XDEBUG_OFF="yes"
 
 before_script:
-  - if [[ "$DEBUG" == "0" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $XDEBUG_OFF = yes ]]; then phpenv config-rm xdebug.ini; fi;
 
 script:
-  - composer update-all
-  - composer test
+  - make
+  - make test-all
 
-after_script:
-  - if [[ "$DEBUG" == "1" ]]; then travis_retry composer coveralls; fi
+after_success:
+  - make coveralls
